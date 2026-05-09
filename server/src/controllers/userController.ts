@@ -119,7 +119,7 @@ export const manualBooking = async (req: Request, res: Response, next: NextFunct
     const { getIO } = await import('../socket');
     const { Booking } = await import('../models/Booking');
 
-    const { studentName, studentPhone, tripId, pickupLocation, dropoffLocation } = req.body;
+    const { studentName, studentPhone, tripId, pickupLocation, pickupAddress, dropoffLocation } = req.body;
 
     if (!studentName || !studentPhone || !tripId || !pickupLocation) {
       return next(new AppError('Please provide studentName, studentPhone, tripId, and pickupLocation', 400));
@@ -130,6 +130,7 @@ export const manualBooking = async (req: Request, res: Response, next: NextFunct
       studentPhone,
       tripId,
       pickupLocation,
+      pickupAddress: pickupAddress || '',
       dropoffLocation: dropoffLocation || 'University Campus',
       paymentScreenshot: 'admin-manual', // admin bypass — no screenshot needed
     });
