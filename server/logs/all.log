@@ -1,0 +1,323 @@
+2026-05-08 19:40:55:4055 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 19:45:41:4541 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 19:52:25:5225 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 19:58:00:580 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 20:02:55:255 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 20:12:23:1223 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 20:16:49:1649 [31merror[39m: [31mError connecting to MongoDB: Server selection timed out after 30000 ms[39m
+2026-05-08 20:19:28:1928 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 20:19:42:1942 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 20:21:36:2136 [32minfo[39m: [32mNew client connected: Yw0Ls8epCx8JYdBmAAAB[39m
+2026-05-08 20:22:02:222 [32minfo[39m: [32mSocket Yw0Ls8epCx8JYdBmAAAB joined trip room: 663b6b1b1b1b1b1b1b1b1b1b[39m
+2026-05-08 20:22:46:2246 [31merror[39m: [31mPOST /api/v1/bookings - not primary[39m
+2026-05-08 20:24:15:2415 [31merror[39m: [31mPOST /api/v1/bookings - not primary[39m
+2026-05-08 20:24:19:2419 [32minfo[39m: [32mClient disconnected: Yw0Ls8epCx8JYdBmAAAB[39m
+2026-05-08 20:24:19:2419 [32minfo[39m: [32mNew client connected: pLAjc5yrGPA4CJtbAAAD[39m
+2026-05-08 20:24:21:2421 [32minfo[39m: [32mSocket pLAjc5yrGPA4CJtbAAAD joined trip room: 663b6b1b1b1b1b1b1b1b1b1b[39m
+2026-05-08 20:24:34:2434 [31merror[39m: [31mPOST /api/v1/bookings - not primary[39m
+2026-05-08 20:25:04:254 [32minfo[39m: [32mClient disconnected: pLAjc5yrGPA4CJtbAAAD[39m
+2026-05-08 20:28:21:2821 [32minfo[39m: [32mNew client connected: AcoZ9lOtIp5MCq6uAAAF[39m
+2026-05-08 20:28:22:2822 [32minfo[39m: [32mClient disconnected: AcoZ9lOtIp5MCq6uAAAF[39m
+2026-05-08 20:28:24:2824 [32minfo[39m: [32mNew client connected: neaOLUahs678NhDHAAAH[39m
+2026-05-08 20:28:27:2827 [32minfo[39m: [32mSocket neaOLUahs678NhDHAAAH joined trip room: 663b6b1b1b1b1b1b1b1b1b1b[39m
+2026-05-08 20:29:47:2947 [31merror[39m: [31mPOST /api/v1/bookings - not primary[39m
+2026-05-08 20:30:24:3024 [32minfo[39m: [32mClient disconnected: neaOLUahs678NhDHAAAH[39m
+2026-05-08 20:31:12:3112 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 20:31:18:3118 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 20:31:56:3156 [32minfo[39m: [32mNew client connected: dV8HYp4ogM_M3LhZAAAB[39m
+2026-05-08 20:32:12:3212 [32minfo[39m: [32mClient disconnected: dV8HYp4ogM_M3LhZAAAB[39m
+2026-05-08 20:32:12:3212 [32minfo[39m: [32mNew client connected: EzW3WGz6oPS6iOjPAAAD[39m
+2026-05-08 20:32:31:3231 [32minfo[39m: [32mSocket EzW3WGz6oPS6iOjPAAAD joined trip room: 663b6b1b1b1b1b1b1b1b1b1b[39m
+2026-05-08 20:33:17:3317 [31merror[39m: [31mPOST /api/v1/bookings - Trip not found[39m
+2026-05-08 20:42:32:4232 [32minfo[39m: [32mClient disconnected: EzW3WGz6oPS6iOjPAAAD[39m
+2026-05-08 20:43:13:4313 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 20:43:24:4324 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 20:46:10:4610 [32minfo[39m: [32mNew client connected: DGzjq0Tf_Z2Pk32HAAAB[39m
+2026-05-08 20:46:55:4655 [32minfo[39m: [32mNew client connected: UZt7XPK7DbrNZY94AAAD[39m
+2026-05-08 20:47:01:471 [32minfo[39m: [32mClient disconnected: UZt7XPK7DbrNZY94AAAD[39m
+2026-05-08 20:47:12:4712 [31merror[39m: [31mPOST /api/v1/bookings - Trip not found[39m
+2026-05-08 20:48:37:4837 [32minfo[39m: [32mClient disconnected: DGzjq0Tf_Z2Pk32HAAAB[39m
+2026-05-08 20:48:38:4838 [32minfo[39m: [32mNew client connected: pilfexLsFBX3aaLNAAAF[39m
+2026-05-08 20:48:55:4855 [32minfo[39m: [32mSocket pilfexLsFBX3aaLNAAAF joined trip room: 663b6b1b1b1b1b1b1b1b1b1b[39m
+2026-05-08 20:49:07:497 [31merror[39m: [31mPOST /api/v1/bookings - Trip not found[39m
+2026-05-08 21:04:13:413 [32minfo[39m: [32mClient disconnected: pilfexLsFBX3aaLNAAAF[39m
+2026-05-08 21:04:13:413 [32minfo[39m: [32mNew client connected: 98hwiqZBFaAtw4ToAAAH[39m
+2026-05-08 21:04:18:418 [32minfo[39m: [32mSocket 98hwiqZBFaAtw4ToAAAH joined trip room: 663b6b1b1b1b1b1b1b1b1b1b[39m
+2026-05-08 21:04:28:428 [31merror[39m: [31mPOST /api/v1/bookings - Trip not found[39m
+2026-05-08 21:06:32:632 [32minfo[39m: [32mClient disconnected: 98hwiqZBFaAtw4ToAAAH[39m
+2026-05-08 21:06:35:635 [32minfo[39m: [32mNew client connected: RtxNTBgVgAXsxvAWAAAJ[39m
+2026-05-08 21:07:32:732 [32minfo[39m: [32mClient disconnected: RtxNTBgVgAXsxvAWAAAJ[39m
+2026-05-08 21:07:32:732 [32minfo[39m: [32mNew client connected: vWDDy203w_iNB32mAAAL[39m
+2026-05-08 21:12:13:1213 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 21:12:23:1223 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 21:12:26:1226 [32minfo[39m: [32mNew client connected: bZ9Cq7t-VDXDMru2AAAB[39m
+2026-05-08 21:13:33:1333 [32minfo[39m: [32mClient disconnected: bZ9Cq7t-VDXDMru2AAAB[39m
+2026-05-08 21:15:02:152 [31merror[39m: [31mPOST /api/v1/trips - Not authorized to access this route[39m
+2026-05-08 21:20:39:2039 [31merror[39m: [31mPOST /api/v1/trips - Please provide all required fields[39m
+2026-05-08 21:22:09:229 [32minfo[39m: [32mNew client connected: bHgVmBeNDa5GyHlxAAAD[39m
+2026-05-08 21:22:14:2214 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:22:30:2230 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:22:30:2230 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:26:33:2633 [31merror[39m: [31mGET /api/v1/export/trip/all?format=csv - Cast to ObjectId failed for value "all" (type string) at path "_id" for model "Trip"[39m
+2026-05-08 21:26:47:2647 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:26:47:2647 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:26:51:2651 [31merror[39m: [31mPOST /api/v1/bookings - Cannot book seats for a completed trip[39m
+2026-05-08 21:27:34:2734 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:27:34:2734 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:27:37:2737 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:27:37:2737 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:27:42:2742 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:27:42:2742 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:27:45:2745 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:27:45:2745 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:27:50:2750 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:27:50:2750 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:27:56:2756 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:27:56:2756 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:01:281 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:01:281 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:04:284 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:04:284 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:09:289 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:09:289 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:12:2812 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:12:2812 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:19:2819 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:19:2819 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:21:2821 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:21:2821 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:26:2826 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:26:2826 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:29:2829 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:29:2829 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:35:2835 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:35:2835 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:37:2837 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:37:2837 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:44:2844 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:44:2844 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:46:2846 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:46:2846 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:51:2851 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:51:2851 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:53:2853 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:53:2853 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:58:2858 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:28:58:2858 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:29:00:290 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:29:00:290 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:29:05:295 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:29:05:295 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:29:07:297 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:29:07:297 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:29:11:2911 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD left trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:29:11:2911 [32minfo[39m: [32mSocket bHgVmBeNDa5GyHlxAAAD joined trip room: 69fe298de2a49db568193307[39m
+2026-05-08 21:30:40:3040 [31merror[39m: [31mPOST /api/v1/vehicles - Please provide all required fields[39m
+2026-05-08 21:31:26:3126 [32minfo[39m: [32mClient disconnected: bHgVmBeNDa5GyHlxAAAD[39m
+2026-05-08 21:31:26:3126 [32minfo[39m: [32mNew client connected: GkCFkGruIbaauNDdAAAF[39m
+2026-05-08 21:34:16:3416 [32minfo[39m: [32mClient disconnected: GkCFkGruIbaauNDdAAAF[39m
+2026-05-08 21:36:50:3650 [32minfo[39m: [32mNew client connected: IIJSnxbogBgJx9hGAAAH[39m
+2026-05-08 21:38:12:3812 [32minfo[39m: [32mClient disconnected: IIJSnxbogBgJx9hGAAAH[39m
+2026-05-08 21:38:13:3813 [32minfo[39m: [32mNew client connected: W1FnUvXYqHFDVIyOAAAJ[39m
+2026-05-08 21:42:39:4239 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 21:42:53:4253 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 21:42:58:4258 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 21:42:59:4259 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 21:43:02:432 [32minfo[39m: [32mNew client connected: QUDE6Xmt1zrLmqM-AAAB[39m
+2026-05-08 21:45:02:452 [32minfo[39m: [32mClient disconnected: QUDE6Xmt1zrLmqM-AAAB[39m
+2026-05-08 21:45:46:4546 [31merror[39m: [31mDELETE /api/v1/vehicles/69fe29aee2a49db568193312 - Cannot delete a vehicle that has active bookings[39m
+2026-05-08 21:46:06:466 [31merror[39m: [31mDELETE /api/v1/trips/69fe298de2a49db568193307 - Cannot delete a trip with active bookings[39m
+2026-05-08 21:47:01:471 [32minfo[39m: [32mNew client connected: IRaWLwNFByR98cbjAAAD[39m
+2026-05-08 21:47:03:473 [32minfo[39m: [32mClient disconnected: IRaWLwNFByR98cbjAAAD[39m
+2026-05-08 21:47:04:474 [32minfo[39m: [32mNew client connected: NDFTlqOmRcStVNXVAAAF[39m
+2026-05-08 21:47:16:4716 [31merror[39m: [31mDELETE /api/v1/vehicles/69fe29aee2a49db568193312 - Cannot delete a vehicle that has active bookings[39m
+2026-05-08 21:49:54:4954 [31merror[39m: [31mPOST /api/v1/trips - These vehicles are already assigned to another trip: GMS - 003[39m
+2026-05-08 21:50:01:501 [31merror[39m: [31mPOST /api/v1/trips - These vehicles are already assigned to another trip: GMS - 003[39m
+2026-05-08 21:50:09:509 [31merror[39m: [31mPOST /api/v1/trips - These vehicles are already assigned to another trip: GMS - 003[39m
+2026-05-08 21:50:42:5042 [31merror[39m: [31mPOST /api/v1/trips - These vehicles are already assigned to another trip: GMS - 003[39m
+2026-05-08 21:55:04:554 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 21:55:17:5517 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 21:55:18:5518 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 21:55:18:5518 [32minfo[39m: [32mNew client connected: tBU5DHs6EAgMRFonAAAB[39m
+2026-05-08 21:55:39:5539 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 21:55:40:5540 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 21:55:40:5540 [32minfo[39m: [32mNew client connected: AyW34TRauIDV2qXcAAAB[39m
+2026-05-08 21:55:49:5549 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 21:55:49:5549 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 21:55:49:5549 [32minfo[39m: [32mNew client connected: kDZXfAjKr0jKci5DAAAB[39m
+2026-05-08 21:56:34:5634 [32minfo[39m: [32mClient disconnected: kDZXfAjKr0jKci5DAAAB[39m
+2026-05-08 22:03:29:329 [32minfo[39m: [32mNew client connected: 1P_lrs81lzPrz7DLAAAD[39m
+2026-05-08 22:06:19:619 [32minfo[39m: [32mClient disconnected: 1P_lrs81lzPrz7DLAAAD[39m
+2026-05-08 22:07:21:721 [31merror[39m: [31mGET /api/v1/users?page=1&limit=10 - Not authorized to access this route[39m
+2026-05-08 22:10:29:1029 [31merror[39m: [31mGET /api/v1/vehicles?limit=100 - Not authorized to access this route[39m
+2026-05-08 22:10:29:1029 [31merror[39m: [31mGET /api/v1/users?limit=100 - Not authorized to access this route[39m
+2026-05-08 22:10:29:1029 [31merror[39m: [31mGET /api/v1/trips?limit=100 - getaddrinfo ENOTFOUND ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 22:39:37:3937 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 22:39:55:3955 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 22:40:37:4037 [31merror[39m: [31mPOST /api/v1/trips - User role Supervisor is not authorized to access this route[39m
+2026-05-08 22:41:20:4120 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 22:41:21:4121 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 22:42:11:4211 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 22:42:12:4212 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 22:43:05:435 [32minfo[39m: [32mNew client connected: Tw73niDTt90tX6U8AAAB[39m
+2026-05-08 22:43:12:4312 [32minfo[39m: [32mSocket Tw73niDTt90tX6U8AAAB joined trip room: 69fe3c9ef5e87478ed72cec2[39m
+2026-05-08 22:43:47:4347 [32minfo[39m: [32mSocket Tw73niDTt90tX6U8AAAB left trip room: 69fe3c9ef5e87478ed72cec2[39m
+2026-05-08 22:43:47:4347 [32minfo[39m: [32mSocket Tw73niDTt90tX6U8AAAB joined trip room: 69fe3c9ef5e87478ed72cec2[39m
+2026-05-08 22:48:35:4835 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 22:48:37:4837 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 22:48:40:4840 [32minfo[39m: [32mNew client connected: dtZ_6gzqllMisSHIAAAB[39m
+2026-05-08 22:51:30:5130 [32minfo[39m: [32mClient disconnected: dtZ_6gzqllMisSHIAAAB[39m
+2026-05-08 22:53:00:530 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 22:53:09:539 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 22:54:43:5443 [32minfo[39m: [32mNew client connected: f7Ddji4k417nNa1_AAAB[39m
+2026-05-08 22:54:46:5446 [32minfo[39m: [32mSocket f7Ddji4k417nNa1_AAAB left trip room: 69fe3c9ef5e87478ed72cec2[39m
+2026-05-08 22:54:46:5446 [32minfo[39m: [32mSocket f7Ddji4k417nNa1_AAAB joined trip room: 69fe3c9ef5e87478ed72cec2[39m
+2026-05-08 23:01:29:129 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 23:01:30:130 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 23:02:12:212 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 23:02:13:213 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 23:02:36:236 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 23:02:37:237 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 23:03:06:36 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 23:03:07:37 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 23:03:28:328 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 23:03:29:329 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 23:09:40:940 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 23:10:26:1026 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 23:10:27:1027 [32minfo[39m: [32mNew client connected: BOZWu71IE46SAGdzAAAB[39m
+2026-05-08 23:11:25:1125 [32minfo[39m: [32mClient disconnected: BOZWu71IE46SAGdzAAAB[39m
+2026-05-08 23:11:30:1130 [32minfo[39m: [32mNew client connected: vFZQBB8DQg6uOwPCAAAD[39m
+2026-05-08 23:11:37:1137 [32minfo[39m: [32mSocket vFZQBB8DQg6uOwPCAAAD joined trip room: 69fe3c9ef5e87478ed72cec2[39m
+2026-05-08 23:12:59:1259 [31merror[39m: [31mDELETE /api/v1/trips/69fe3c9ef5e87478ed72cec2 - Cannot delete a trip with active bookings[39m
+2026-05-08 23:15:25:1525 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 23:15:40:1540 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-08 23:15:40:1540 [32minfo[39m: [32mNew client connected: WVdvzk8ObLU1G6FxAAAB[39m
+2026-05-08 23:19:49:1949 [31merror[39m: [31mPOST /api/v1/bookings - Trip not found[39m
+2026-05-08 23:19:55:1955 [32minfo[39m: [32mClient disconnected: WVdvzk8ObLU1G6FxAAAB[39m
+2026-05-08 23:20:07:207 [32minfo[39m: [32mNew client connected: 1OlxPKB_zcw2jowTAAAD[39m
+2026-05-08 23:20:09:209 [32minfo[39m: [32mSocket 1OlxPKB_zcw2jowTAAAD joined trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-08 23:20:34:2034 [32minfo[39m: [32mSocket 1OlxPKB_zcw2jowTAAAD left trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-08 23:20:34:2034 [32minfo[39m: [32mSocket 1OlxPKB_zcw2jowTAAAD joined trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-08 23:21:20:2120 [32minfo[39m: [32mClient disconnected: 1OlxPKB_zcw2jowTAAAD[39m
+2026-05-08 23:21:21:2121 [32minfo[39m: [32mNew client connected: RUVY5-iZ604ltEk_AAAF[39m
+2026-05-08 23:21:23:2123 [32minfo[39m: [32mSocket RUVY5-iZ604ltEk_AAAF joined trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-08 23:21:26:2126 [32minfo[39m: [32mClient disconnected: RUVY5-iZ604ltEk_AAAF[39m
+2026-05-09 01:06:15:615 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 01:07:50:750 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 01:17:28:1728 [32minfo[39m: [32mNew client connected: VMjERnZK5ctOL8geAAAB[39m
+2026-05-09 01:17:33:1733 [32minfo[39m: [32mSocket VMjERnZK5ctOL8geAAAB joined trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-09 01:18:24:1824 [32minfo[39m: [32mSocket VMjERnZK5ctOL8geAAAB left trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-09 01:18:24:1824 [32minfo[39m: [32mSocket VMjERnZK5ctOL8geAAAB joined trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-09 01:21:23:2123 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 01:21:30:2130 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 01:21:32:2132 [32minfo[39m: [32mNew client connected: gS-5rK81Q8BnPs9gAAAB[39m
+2026-05-09 01:22:02:222 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 01:22:03:223 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 01:22:03:223 [32minfo[39m: [32mNew client connected: 2cJgHijQB3zRGcXQAAAB[39m
+2026-05-09 01:26:37:2637 [32minfo[39m: [32mClient disconnected: 2cJgHijQB3zRGcXQAAAB[39m
+2026-05-09 01:26:37:2637 [32minfo[39m: [32mNew client connected: 009VAu8qHzI85BHTAAAD[39m
+2026-05-09 01:32:43:3243 [32minfo[39m: [32mSocket 009VAu8qHzI85BHTAAAD joined trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-09 01:33:53:3353 [32minfo[39m: [32mSocket 009VAu8qHzI85BHTAAAD left trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-09 01:33:53:3353 [32minfo[39m: [32mSocket 009VAu8qHzI85BHTAAAD joined trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-09 01:33:53:3353 [32minfo[39m: [32mSocket 009VAu8qHzI85BHTAAAD watching booking: 69fe64d03a8f4adf8007e9b2[39m
+2026-05-09 01:34:20:3420 [32minfo[39m: [32mSocket 009VAu8qHzI85BHTAAAD left trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-09 01:34:32:3432 [32minfo[39m: [32mSocket 009VAu8qHzI85BHTAAAD joined trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-09 01:38:04:384 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 01:38:05:385 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 01:38:08:388 [32minfo[39m: [32mNew client connected: WA61_0QeXm2R4H2hAAAB[39m
+2026-05-09 01:38:42:3842 [31merror[39m: [31mError connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-05-09 01:40:14:4014 [31merror[39m: [31mError connecting to MongoDB: connection 1 to 159.143.223.189:27017 timed out[39m
+2026-05-09 01:56:00:560 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 01:56:01:561 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 01:56:05:565 [32minfo[39m: [32mNew client connected: R5BvEJjyNIYFMLCBAAAB[39m
+2026-05-09 01:57:37:5737 [32minfo[39m: [32mClient disconnected: R5BvEJjyNIYFMLCBAAAB[39m
+2026-05-09 01:57:37:5737 [32minfo[39m: [32mNew client connected: 3SJQZ7yGN_QeSCA4AAAD[39m
+2026-05-09 01:58:31:5831 [32minfo[39m: [32mSocket 3SJQZ7yGN_QeSCA4AAAD joined trip room: 69fe4500c79ca8827514b6a7[39m
+2026-05-09 02:50:43:5043 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 02:50:51:5051 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 02:52:37:5237 [31merror[39m: [31mGET /api/v1/students/my-bookings - User role Supervisor is not authorized to access this route[39m
+2026-05-09 02:53:07:537 [31merror[39m: [31mGET /api/v1/students/my-bookings - User role Supervisor is not authorized to access this route[39m
+2026-05-09 02:58:15:5815 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 02:58:16:5816 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 03:04:45:445 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:04:46:446 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 03:04:53:453 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:04:54:454 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 03:10:04:104 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:10:05:105 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 03:10:14:1014 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:10:15:1015 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 03:10:34:1034 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:10:35:1035 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 03:17:14:1714 [31merror[39m: [31mPOST /api/v1/trips - Please provide route, date, and departureTime[39m
+2026-05-09 03:17:27:1727 [31merror[39m: [31mPOST /api/v1/trips - These vehicles are already assigned to another trip: KHI - 001, GMS - 003[39m
+2026-05-09 03:23:37:2337 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:23:38:2338 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 03:24:11:2411 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:24:12:2412 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 03:24:46:2446 [31merror[39m: [31mError connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-05-09 03:26:32:2632 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:26:33:2633 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 03:26:35:2635 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:30:56:3056 [31merror[39m: [31mPOST /api/v1/bookings - Only image files (jpg, png, webp) and PDF are allowed[39m
+2026-05-09 03:41:07:417 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:41:27:4127 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 03:49:03:493 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:49:03:493 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 03:49:04:494 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 18:32:50:3250 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 18:33:09:339 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 18:43:01:431 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 18:43:01:431 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 18:43:18:4318 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 18:44:21:4421 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 18:44:22:4422 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 18:44:22:4422 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 20:50:37:5037 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 20:50:49:5049 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 20:50:57:5057 [31merror[39m: [31mError connecting to MongoDB: connect ETIMEDOUT 159.143.223.189:27017[39m
+2026-05-09 20:51:49:5149 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 20:51:49:5149 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 20:51:50:5150 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 20:52:29:5229 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 20:52:30:5230 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 20:52:47:5247 [31merror[39m: [31mError connecting to MongoDB: connect ETIMEDOUT 159.143.223.189:27017[39m
+2026-05-09 20:52:55:5255 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 20:52:56:5256 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 20:53:15:5315 [31merror[39m: [31mError connecting to MongoDB: connect ETIMEDOUT 159.143.223.189:27017[39m
+2026-05-09 20:56:28:5628 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 20:56:28:5628 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 20:56:29:5629 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 20:57:04:574 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 20:57:04:574 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 20:57:05:575 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 20:57:46:5746 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 20:57:47:5747 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 20:57:48:5748 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:12:50:1250 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:13:46:1346 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:14:29:1429 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:17:53:1753 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:19:22:1922 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:19:22:1922 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:20:08:208 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:20:08:208 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:20:10:2010 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 21:20:47:2047 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:21:33:2133 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:21:33:2133 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:21:34:2134 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 21:21:53:2153 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:22:42:2242 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:22:42:2242 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:22:43:2243 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 21:24:15:2415 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:25:45:2545 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:25:45:2545 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:25:47:2547 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 21:26:14:2614 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:28:06:286 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:28:08:288 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 21:35:35:3535 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-09 21:35:41:3541 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-09 21:35:56:3556 [32minfo[39m: [32mMongoDB Connected: ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m

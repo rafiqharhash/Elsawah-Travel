@@ -1,0 +1,52 @@
+2026-05-08 19:40:55:4055 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 19:45:41:4541 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 19:52:25:5225 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 19:58:00:580 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 20:02:55:255 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 20:12:23:1223 [31merror[39m: [31mError connecting to MongoDB: querySrv ECONNREFUSED _mongodb._tcp.cluster0.asqlj5y.mongodb.net[39m
+2026-05-08 20:16:49:1649 [31merror[39m: [31mError connecting to MongoDB: Server selection timed out after 30000 ms[39m
+2026-05-08 20:22:46:2246 [31merror[39m: [31mPOST /api/v1/bookings - not primary[39m
+2026-05-08 20:24:15:2415 [31merror[39m: [31mPOST /api/v1/bookings - not primary[39m
+2026-05-08 20:24:34:2434 [31merror[39m: [31mPOST /api/v1/bookings - not primary[39m
+2026-05-08 20:29:47:2947 [31merror[39m: [31mPOST /api/v1/bookings - not primary[39m
+2026-05-08 20:33:17:3317 [31merror[39m: [31mPOST /api/v1/bookings - Trip not found[39m
+2026-05-08 20:47:12:4712 [31merror[39m: [31mPOST /api/v1/bookings - Trip not found[39m
+2026-05-08 20:49:07:497 [31merror[39m: [31mPOST /api/v1/bookings - Trip not found[39m
+2026-05-08 21:04:28:428 [31merror[39m: [31mPOST /api/v1/bookings - Trip not found[39m
+2026-05-08 21:15:02:152 [31merror[39m: [31mPOST /api/v1/trips - Not authorized to access this route[39m
+2026-05-08 21:20:39:2039 [31merror[39m: [31mPOST /api/v1/trips - Please provide all required fields[39m
+2026-05-08 21:26:33:2633 [31merror[39m: [31mGET /api/v1/export/trip/all?format=csv - Cast to ObjectId failed for value "all" (type string) at path "_id" for model "Trip"[39m
+2026-05-08 21:26:51:2651 [31merror[39m: [31mPOST /api/v1/bookings - Cannot book seats for a completed trip[39m
+2026-05-08 21:30:40:3040 [31merror[39m: [31mPOST /api/v1/vehicles - Please provide all required fields[39m
+2026-05-08 21:45:46:4546 [31merror[39m: [31mDELETE /api/v1/vehicles/69fe29aee2a49db568193312 - Cannot delete a vehicle that has active bookings[39m
+2026-05-08 21:46:06:466 [31merror[39m: [31mDELETE /api/v1/trips/69fe298de2a49db568193307 - Cannot delete a trip with active bookings[39m
+2026-05-08 21:47:16:4716 [31merror[39m: [31mDELETE /api/v1/vehicles/69fe29aee2a49db568193312 - Cannot delete a vehicle that has active bookings[39m
+2026-05-08 21:49:54:4954 [31merror[39m: [31mPOST /api/v1/trips - These vehicles are already assigned to another trip: GMS - 003[39m
+2026-05-08 21:50:01:501 [31merror[39m: [31mPOST /api/v1/trips - These vehicles are already assigned to another trip: GMS - 003[39m
+2026-05-08 21:50:09:509 [31merror[39m: [31mPOST /api/v1/trips - These vehicles are already assigned to another trip: GMS - 003[39m
+2026-05-08 21:50:42:5042 [31merror[39m: [31mPOST /api/v1/trips - These vehicles are already assigned to another trip: GMS - 003[39m
+2026-05-08 22:07:21:721 [31merror[39m: [31mGET /api/v1/users?page=1&limit=10 - Not authorized to access this route[39m
+2026-05-08 22:10:29:1029 [31merror[39m: [31mGET /api/v1/vehicles?limit=100 - Not authorized to access this route[39m
+2026-05-08 22:10:29:1029 [31merror[39m: [31mGET /api/v1/users?limit=100 - Not authorized to access this route[39m
+2026-05-08 22:10:29:1029 [31merror[39m: [31mGET /api/v1/trips?limit=100 - getaddrinfo ENOTFOUND ac-yecreeq-shard-00-00.asqlj5y.mongodb.net[39m
+2026-05-08 22:40:37:4037 [31merror[39m: [31mPOST /api/v1/trips - User role Supervisor is not authorized to access this route[39m
+2026-05-08 23:12:59:1259 [31merror[39m: [31mDELETE /api/v1/trips/69fe3c9ef5e87478ed72cec2 - Cannot delete a trip with active bookings[39m
+2026-05-08 23:19:49:1949 [31merror[39m: [31mPOST /api/v1/bookings - Trip not found[39m
+2026-05-09 01:38:42:3842 [31merror[39m: [31mError connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-05-09 01:40:14:4014 [31merror[39m: [31mError connecting to MongoDB: connection 1 to 159.143.223.189:27017 timed out[39m
+2026-05-09 02:52:37:5237 [31merror[39m: [31mGET /api/v1/students/my-bookings - User role Supervisor is not authorized to access this route[39m
+2026-05-09 02:53:07:537 [31merror[39m: [31mGET /api/v1/students/my-bookings - User role Supervisor is not authorized to access this route[39m
+2026-05-09 03:17:14:1714 [31merror[39m: [31mPOST /api/v1/trips - Please provide route, date, and departureTime[39m
+2026-05-09 03:17:27:1727 [31merror[39m: [31mPOST /api/v1/trips - These vehicles are already assigned to another trip: KHI - 001, GMS - 003[39m
+2026-05-09 03:24:46:2446 [31merror[39m: [31mError connecting to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/[39m
+2026-05-09 03:30:56:3056 [31merror[39m: [31mPOST /api/v1/bookings - Only image files (jpg, png, webp) and PDF are allowed[39m
+2026-05-09 20:50:57:5057 [31merror[39m: [31mError connecting to MongoDB: connect ETIMEDOUT 159.143.223.189:27017[39m
+2026-05-09 20:52:47:5247 [31merror[39m: [31mError connecting to MongoDB: connect ETIMEDOUT 159.143.223.189:27017[39m
+2026-05-09 20:53:15:5315 [31merror[39m: [31mError connecting to MongoDB: connect ETIMEDOUT 159.143.223.189:27017[39m
+2026-05-09 21:12:50:1250 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:13:46:1346 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:14:29:1429 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:17:53:1753 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:20:47:2047 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:21:53:2153 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
+2026-05-09 21:26:14:2614 [31merror[39m: [31mPOST /api/v1/auth/login - Incorrect credentials[39m
