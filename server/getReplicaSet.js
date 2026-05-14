@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const uri = "mongodb://rafiqharhash_db_user:myclusterpassword@ac-yecreeq-shard-00-00.asqlj5y.mongodb.net:27017/uniride?ssl=true&authSource=admin&directConnection=true";
+const uri = "mongodb://rafiqharhash_db_user:iambatman@ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net:27017/?ssl=true&authSource=admin&directConnection=true";
 
 mongoose.connect(uri)
   .then(() => {

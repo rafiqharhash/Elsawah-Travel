@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 async function testBooking() {
-  await mongoose.connect('mongodb://rafiqharhash_db_user:myclusterpassword@ac-yecreeq-shard-00-00.asqlj5y.mongodb.net:27017,ac-yecreeq-shard-00-01.asqlj5y.mongodb.net:27017,ac-yecreeq-shard-00-02.asqlj5y.mongodb.net:27017/uniride?ssl=true&replicaSet=atlas-8r12j2-shard-0&authSource=admin&retryWrites=true&w=majority');
+  await mongoose.connect('mongodb://rafiqharhash_db_user:iambatman@ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net:27017,ac-hq6lrxe-shard-00-01.ycvmc5a.mongodb.net:27017,ac-hq6lrxe-shard-00-02.ycvmc5a.mongodb.net:27017/?ssl=true&replicaSet=atlas-6epgvu-shard-0&authSource=admin&appName=Cluster0');
 
   const { Trip } = require('./src/models/Trip');
   const { Vehicle } = require('./src/models/Vehicle');
