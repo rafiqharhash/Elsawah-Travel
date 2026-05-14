@@ -58,7 +58,7 @@ export default function DashboardOverview() {
                 <span className="text-xs font-medium text-amber-400 uppercase tracking-widest">Supervisor Access</span>
               </div>
               <h2 className="text-3xl font-bold">
-                Welcome Back, <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Rafiq</span> 👋
+                Welcome Back, <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Berlin</span> 👋
               </h2>
               <p className="text-muted-foreground mt-1 text-sm">
                 You have full control over the Uni-Ride transport system. Here's today's overview.

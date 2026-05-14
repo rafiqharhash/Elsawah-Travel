@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import { env } from '../config/env';
 import { sendResponse } from '../utils/responseFormatter';
 import { AppError } from '../middleware/errorHandler';
+import { logger } from '../utils/logger';
 
 const signToken = (id: string) => {
   return jwt.sign({ id }, env.JWT_SECRET, {
@@ -20,13 +21,11 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
     return next(new AppError('Phone number already registered', 400));
   }
 
-  const hashedPassword = password ? await bcrypt.hash(password, 12) : undefined;
-
   const user = await User.create({
     name,
     email,
     phone,
-    password: hashedPassword,
+    password,
     role: role || 'Student',
   });
 
@@ -54,15 +53,10 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
   // Explicitly select password since it is hidden by default in schema
   const user = await User.findOne({ username: username.toLowerCase().trim() }).select('+password');
 
-  console.log(`[DEBUG] Login attempt for username: "${username}"`);
-  if (!user) {
-    console.log(`[DEBUG] No user found with username: "${username}"`);
-  } else {
-    const isMatch = user.password ? await bcrypt.compare(password, user.password) : false;
-    console.log(`[DEBUG] User found. Password match: ${isMatch}`);
-  }
-
-  if (!user || !user.password || !(await bcrypt.compare(password, user.password))) {
+  logger.debug(`Login attempt for username: "${username}"`);
+  
+  if (!user || !user.password || !(await user.comparePassword(password))) {
+    logger.debug(`Login failed for username: "${username}"`);
     return next(new AppError('Incorrect credentials', 401));
   }
 

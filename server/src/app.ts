@@ -44,6 +44,17 @@ export const buildApp = (): Express => {
   // Swagger Documentation
   require('./config/swagger').setupSwagger(app);
 
+  // Welcome / API Info
+  app.get('/', (req, res) => {
+    res.status(200).json({
+      message: 'Welcome to Elsawah Travel API',
+      version: '1.0.0',
+      status: 'Running',
+      docs: '/api-docs',
+      health: '/health'
+    });
+  });
+
   // Health Check
   app.get('/health', (req, res) => {
     res.status(200).json({ status: 'OK', timestamp: new Date() });

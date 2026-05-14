@@ -4,6 +4,7 @@ import { env } from '../config/env';
 import { sendResponse } from '../utils/responseFormatter';
 import { AppError } from '../middleware/errorHandler';
 import { User, IUser } from '../models/User';
+import { logger } from '../utils/logger';
 
 export interface AuthRequest extends Request {
   user?: IUser;
@@ -50,6 +51,7 @@ export const authorize = (...roles: string[]) => {
     }
 
     if (!roles.includes(req.user.role)) {
+      logger.debug(`Authorization failed for user ${req.user._id}. Role: ${req.user.role}, Required: ${roles.join(', ')}`);
       return next(
         new AppError(
           `User role ${req.user.role} is not authorized to access this route`,

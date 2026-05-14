@@ -57,14 +57,12 @@ export const createAdmin = async (req: Request, res: Response, next: NextFunctio
       return next(new AppError('A user with this phone or username already exists', 400));
     }
 
-    const hashedPassword = await bcrypt.hash(password, 12);
-
     const admin = await User.create({
       name,
       phone,
       email: email || undefined,
       username: username?.toLowerCase().trim() || undefined,
-      password: hashedPassword,
+      password,
       role: 'Admin',
     });
 
