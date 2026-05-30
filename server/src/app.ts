@@ -40,6 +40,7 @@ export const buildApp = (): Express => {
   app.use('/api/v1/users', require('./routes/userRoutes').default);
   app.use('/api/v1/students', require('./routes/studentRoutes').default);
   app.use('/api/v1/stats', require('./routes/statsRoutes').default);
+  app.use('/api/v1/locations', require('./routes/locationRoutes').default);
   
   // Swagger Documentation
   require('./config/swagger').setupSwagger(app);

@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/services/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { FileSpreadsheet, FileText, Download, AlertCircle, Search, FileDown, Bus } from "lucide-react";
+import { FileSpreadsheet, FileText, Download, AlertCircle, Search, FileDown, Bus, Globe, GlobeLock } from "lucide-react";
 
 const STATUS_COLORS: Record<string, string> = {
   Scheduled: "text-blue-400 bg-blue-400/10",
@@ -24,14 +24,17 @@ interface Trip {
   totalBooked: number;
   totalCapacity: number;
   occupancyPercentage: number;
+  isPublished: boolean;
   vehicleIds: { _id: string; vehicleNumber: string; driverName: string }[];
 }
 
 export default function ReportsPage() {
+  const qc = useQueryClient();
   const [downloading, setDownloading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [publishedToast, setPublishedToast] = useState<string | null>(null);
 
   // Fetch ALL trips — no status restriction
   const { data, isLoading } = useQuery({
@@ -40,6 +43,17 @@ export default function ReportsPage() {
       const res = await api.get("/trips?limit=200");
       return res.data.data as Trip[];
     },
+  });
+
+  const publishMutation = useMutation({
+    mutationFn: ({ id, isPublished }: { id: string; isPublished: boolean }) =>
+      api.patch(`/trips/${id}/publish`, { isPublished }),
+    onSuccess: (_, variables) => {
+      qc.invalidateQueries({ queryKey: ["all-trips-export"] });
+      setPublishedToast(variables.isPublished ? "Sheet published! Students can now see their assignments." : "Sheet unpublished.");
+      setTimeout(() => setPublishedToast(null), 3500);
+    },
+    onError: (err: any) => setError(err.response?.data?.message || "Publish failed"),
   });
 
   const trips = (data || []).filter(t => {
@@ -163,6 +177,7 @@ export default function ReportsPage() {
                     <th className="text-left py-3 px-4 font-medium">Vehicles</th>
                     <th className="text-left py-3 px-4 font-medium">Status</th>
                     <th className="text-left py-3 px-4 font-medium">Passengers</th>
+                    <th className="text-left py-3 px-4 font-medium">Publish Sheet</th>
                     <th className="text-left py-3 px-4 font-medium">Export</th>
                   </tr>
                 </thead>
@@ -200,6 +215,22 @@ export default function ReportsPage() {
                             style={{ width: `${t.occupancyPercentage || 0}%` }}
                           />
                         </div>
+                      </td>
+                      {/* Publish toggle */}
+                      <td className="py-3 px-4">
+                        <button
+                          onClick={() => publishMutation.mutate({ id: t._id, isPublished: !t.isPublished })}
+                          disabled={publishMutation.isPending}
+                          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
+                            t.isPublished
+                              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20"
+                              : "bg-white/5 text-muted-foreground border-white/10 hover:border-primary/30 hover:text-primary hover:bg-primary/5"
+                          }`}
+                          title={t.isPublished ? "Click to unpublish" : "Publish sheet to students"}
+                        >
+                          {t.isPublished ? <Globe size={12} /> : <GlobeLock size={12} />}
+                          {t.isPublished ? "Published" : "Publish"}
+                        </button>
                       </td>
                       <td className="py-3 px-4">
                         <div className="flex gap-1.5 flex-wrap">
@@ -249,6 +280,14 @@ export default function ReportsPage() {
           )}
         </CardContent>
       </Card>
+
+      {/* Toast notification */}
+      {publishedToast && (
+        <div className="fixed bottom-6 right-6 z-50 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-medium px-5 py-3 rounded-xl shadow-2xl backdrop-blur flex items-center gap-2 animate-in slide-in-from-bottom-4">
+          <Globe size={15} />
+          {publishedToast}
+        </div>
+      )}
     </div>
   );
 }

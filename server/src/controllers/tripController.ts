@@ -218,10 +218,6 @@ async function forceCancelTrip(tripId: string) {
     const cancelledCount = result.modifiedCount;
 
     // 2. Release all assigned vehicles
-    // We no longer need to clear vehicle seats because seat state is derived dynamically from bookings.
-    // However, if we want the trip to no longer claim these vehicles, we clear trip.vehicleIds below.
-    // But since trips can be tracked historically, we will keep vehicleIds on the trip!
-    // Just setting trip.status = Cancelled is enough to free them up, but since multiple trips can assign the same vehicle now, vehicles are ALWAYS "free".
     const vehiclesReleased = trip.vehicleIds.length;
 
     // 3. Mark trip as Cancelled
@@ -241,4 +237,30 @@ async function forceCancelTrip(tripId: string) {
     throw err;
   }
 }
+
+// @desc    Publish / unpublish a trip sheet (makes it visible to students)
+// @route   PATCH /api/v1/trips/:id/publish
+// @access  Private (Admin / Supervisor)
+export const publishTrip = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const trip = await Trip.findById(req.params.id);
+    if (!trip) return next(new AppError('Trip not found', 404));
+
+    // Toggle — or accept explicit value from body
+    const newValue = req.body.isPublished !== undefined
+      ? Boolean(req.body.isPublished)
+      : !trip.isPublished;
+
+    trip.isPublished = newValue;
+    await trip.save();
+
+    sendResponse(
+      res, 200, true,
+      newValue ? 'Trip sheet published — students can now view their seat assignments' : 'Trip sheet unpublished',
+      { isPublished: trip.isPublished }
+    );
+  } catch (error) {
+    next(error);
+  }
+};
 

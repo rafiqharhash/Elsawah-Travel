@@ -360,3 +360,41 @@
 2026-05-14 21:03:13:313 [32minfo[39m: [32mServer running in development mode on port 5000[39m
 2026-05-14 21:03:35:335 [31merror[39m: [31mPOST /api/v1/bookings - Payment screenshot is required[39m
 2026-05-14 21:03:47:347 [31merror[39m: [31mPOST /api/v1/bookings - Payment screenshot is required[39m
+2026-05-30 17:58:53:5853 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 17:59:30:5930 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-30 18:01:20:120 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 18:01:21:121 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-30 18:03:07:37 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
+2026-05-30 18:03:22:322 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
+2026-05-30 18:04:29:429 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
+2026-05-30 18:04:30:430 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
+2026-05-30 18:04:49:449 [31merror[39m: [31mGET /api/v1/users?role=Admin&limit=50 - Not authorized to access this route[39m
+2026-05-30 18:04:59:459 [31merror[39m: [31mGET /api/v1/users?role=Admin&limit=50 - Not authorized to access this route[39m
+2026-05-30 18:06:31:631 [37mdebug[39m: [37mLogin attempt for username: "berlin"[39m
+2026-05-30 18:30:56:3056 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 18:30:57:3057 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-30 18:32:32:3232 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 18:32:33:3233 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-30 18:46:39:4639 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 18:46:40:4640 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-30 18:50:17:5017 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 18:50:19:5019 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-30 18:51:14:5114 [37mdebug[39m: [37mLogin attempt for username: "berlin"[39m
+2026-05-30 18:54:47:5447 [31merror[39m: [31mPOST /api/v1/trips - Please provide route, date, and departureTime[39m
+2026-05-30 18:55:03:553 [31merror[39m: [31mPOST /api/v1/trips - Please provide route, date, and departureTime[39m
+2026-05-30 18:55:17:5517 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 18:55:18:5518 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-30 18:55:41:5541 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 18:55:42:5542 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-30 18:55:51:5551 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 18:55:52:5552 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-30 18:56:03:563 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 18:56:05:565 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-30 18:57:55:5755 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 19:28:32:2832 [32minfo[39m: [32mMongoDB Connected: ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net[39m
+2026-05-30 19:29:15:2915 [32minfo[39m: [32mServer running in development mode on port 5000[39m
+2026-05-30 19:34:00:340 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m
+2026-05-30 19:34:04:344 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m
+2026-05-30 19:34:06:346 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m
+2026-05-30 19:34:11:3411 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m
+2026-05-30 19:34:19:3419 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m

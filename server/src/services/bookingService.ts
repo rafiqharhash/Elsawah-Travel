@@ -2,29 +2,14 @@ import mongoose from 'mongoose';
 import { Vehicle } from '../models/Vehicle';
 import { Trip } from '../models/Trip';
 import { Booking } from '../models/Booking';
+import { Location } from '../models/Location';
 import { AppError } from '../middleware/errorHandler';
 
-// ─── Fixed pickup locations & prices ─────────────────────────────────────────
-export const PICKUP_LOCATIONS = [
-  'Kafr Eksheikh',
-  'Desouk',
-  'Damanhour',
-  'Abu Hummus',
-  'Kafr Eldawwar',
-] as const;
-
-export type PickupLocation = typeof PICKUP_LOCATIONS[number];
-
-export const PICKUP_PRICES: Record<PickupLocation, number> = {
-  'Kafr Eksheikh': 210,
-  'Desouk':        190,
-  'Damanhour':     190,
-  'Abu Hummus':    170,
-  'Kafr Eldawwar': 170,
-};
-
-export const getPickupPrice = (location: string): number =>
-  PICKUP_PRICES[location as PickupLocation] ?? 0;
+// ─── Pickup price is now resolved dynamically from the Location collection ─────
+// Legacy exports kept so that any other files importing them don't break.
+export const PICKUP_LOCATIONS: readonly string[] = [];
+export const PICKUP_PRICES: Record<string, number> = {};
+export const getPickupPrice = (_location: string): number => 0; // no longer used — see resolvePickupFare()
 
 // ─── Main booking transaction ─────────────────────────────────────────────────
 interface BookingParams {
@@ -50,15 +35,19 @@ export const processBookingTransaction = async (params: BookingParams) => {
     } = params;
     const seatCount = Math.max(1, Math.min(params.seatCount ?? 1, 10));
 
-    // 1. Validate pickup location
-    if (!(PICKUP_LOCATIONS as readonly string[]).includes(pickupLocation)) {
+    // 1. Validate pickup location against DB (dynamic)
+    const pickupDoc = await Location.findOne({ name: pickupLocation, type: 'pickup' }).session(session);
+    if (!pickupDoc) {
       throw new AppError(
-        `Invalid pickup location. Must be one of: ${PICKUP_LOCATIONS.join(', ')}`,
+        `Invalid pickup location: "${pickupLocation}". Please select a valid pickup area.`,
         400,
       );
     }
+    if (!pickupDoc.isActive) {
+      throw new AppError(`The pickup location "${pickupLocation}" is currently unavailable.`, 400);
+    }
 
-    const pricePerSeat = getPickupPrice(pickupLocation);
+    const pricePerSeat = pickupDoc.fare;
     const amount       = pricePerSeat * seatCount;
 
     // 2. Verify trip is bookable

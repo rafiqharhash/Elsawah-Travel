@@ -125,8 +125,8 @@ export const getMyBookings = async (req: Request, res: Response, next: NextFunct
       { studentPhone: me.phone },   // fallback for bookings made before login existed
     ],
   })
-    .populate('tripId',    'route date departureTime status')
-    .populate('vehicleId', 'vehicleNumber driverName')
+    .populate('tripId',    'route date departureTime status isPublished')
+    .populate('vehicleId', 'vehicleNumber driverName driverPhone')
     .sort({ createdAt: -1 });
 
   sendResponse(res, 200, true, 'Bookings retrieved', bookings);

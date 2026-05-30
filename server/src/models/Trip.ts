@@ -5,12 +5,13 @@ export interface ITrip extends Document {
   date: Date;
   departureTime: string;
   status: 'Scheduled' | 'Active' | 'Completed' | 'Cancelled';
-  vehicleIds: mongoose.Types.ObjectId[]; // Assigned fleet vehicles
+  vehicleIds: mongoose.Types.ObjectId[];
   locationTimes?: { location: string; time: string }[];
   totalCapacity: number;
   totalBooked: number;
   totalIncome: number;
   occupancyPercentage: number;
+  isPublished: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -35,6 +36,7 @@ const tripSchema = new Schema<ITrip>(
     totalCapacity: { type: Number, default: 0 },
     totalBooked: { type: Number, default: 0 },
     totalIncome: { type: Number, default: 0 },
+    isPublished: { type: Boolean, default: false },
   },
   {
     timestamps: true,

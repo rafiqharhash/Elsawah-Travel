@@ -3,7 +3,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Bus, Route, Users, BarChart3, LogOut, ShieldCheck, BookOpen } from "lucide-react";
+import { Home, Bus, Route, Users, BarChart3, LogOut, ShieldCheck, BookOpen, MapPin } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LanguageToggle } from "@/components/ui/language-toggle";
 import { useLang } from "@/app/providers";
@@ -79,6 +79,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         <nav className="flex-1 p-4 space-y-1">
           <NavItem href="/admin/dashboard" icon={<Home size={18} />} label={t('overview')} active={pathname === "/admin/dashboard"} />
           <NavItem href="/admin/trips" icon={<Route size={18} />} label={t('trips')} active={pathname.startsWith("/admin/trips")} />
+          <NavItem href="/admin/locations" icon={<MapPin size={18} />} label="Locations & Fares" active={pathname.startsWith("/admin/locations")} />
           <NavItem href="/admin/vehicles" icon={<Bus size={18} />} label={t('vehicles')} active={pathname.startsWith("/admin/vehicles")} />
           <NavItem href="/admin/students" icon={<Users size={18} />} label={t('students')} active={pathname.startsWith("/admin/students")} />
           <NavItem href="/admin/bookings" icon={<BookOpen size={18} />} label="Bookings" active={pathname.startsWith("/admin/bookings")} />

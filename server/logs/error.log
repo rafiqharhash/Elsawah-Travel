@@ -63,3 +63,16 @@
 2026-05-14 20:59:50:5950 [31merror[39m: [31mGET /api/v1/students/my-bookings - User role Supervisor is not authorized to access this route[39m
 2026-05-14 21:03:35:335 [31merror[39m: [31mPOST /api/v1/bookings - Payment screenshot is required[39m
 2026-05-14 21:03:47:347 [31merror[39m: [31mPOST /api/v1/bookings - Payment screenshot is required[39m
+2026-05-30 18:03:07:37 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
+2026-05-30 18:03:22:322 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
+2026-05-30 18:04:29:429 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
+2026-05-30 18:04:30:430 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
+2026-05-30 18:04:49:449 [31merror[39m: [31mGET /api/v1/users?role=Admin&limit=50 - Not authorized to access this route[39m
+2026-05-30 18:04:59:459 [31merror[39m: [31mGET /api/v1/users?role=Admin&limit=50 - Not authorized to access this route[39m
+2026-05-30 18:54:47:5447 [31merror[39m: [31mPOST /api/v1/trips - Please provide route, date, and departureTime[39m
+2026-05-30 18:55:03:553 [31merror[39m: [31mPOST /api/v1/trips - Please provide route, date, and departureTime[39m
+2026-05-30 19:34:00:340 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m
+2026-05-30 19:34:04:344 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m
+2026-05-30 19:34:06:346 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m
+2026-05-30 19:34:11:3411 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m
+2026-05-30 19:34:19:3419 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m

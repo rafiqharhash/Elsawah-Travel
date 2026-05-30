@@ -6,6 +6,7 @@ import {
   updateTrip,
   deleteTrip,
   cancelTrip,
+  publishTrip,
 } from '../controllers/tripController';
 import { protect, authorize } from '../middleware/auth';
 
@@ -22,5 +23,8 @@ router.delete('/:id', protect, authorize('Admin', 'Supervisor'), deleteTrip);
 
 // Supervisor only: force-cancel a trip even when it has bookings
 router.patch('/:id/cancel', protect, authorize('Supervisor'), cancelTrip);
+
+// Admin + Supervisor: publish/unpublish a trip sheet for students
+router.patch('/:id/publish', protect, authorize('Admin', 'Supervisor'), publishTrip);
 
 export default router;

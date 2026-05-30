@@ -14,26 +14,12 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LanguageToggle } from "@/components/ui/language-toggle";
 import { useLang } from "@/app/providers";
 import { useStudent } from "@/contexts/StudentContext";
-import { Upload, CheckCircle2, Clock, XCircle, X, LogOut, FileText, Plus, User } from "lucide-react";
+import { Upload, CheckCircle2, Clock, XCircle, X, LogOut, FileText, Plus, User, BookOpen, Bus, MapPin, Navigation } from "lucide-react";
 import { Footer } from "@/components/ui/footer";
 
-// ── Pricing & locations ───────────────────────────────────────────────────────
-const LOCATIONS = [
-  { en: "Kafr Eksheikh", ar: "كفر الشيخ", price: 210 },
-  { en: "Desouk", ar: "دسوق", price: 190 },
-  { en: "Damanhour", ar: "دمنهور", price: 190 },
-  { en: "Abu Hummus", ar: "أبو حمص", price: 170 },
-  { en: "Kafr Eldawwar", ar: "كفر الدوار", price: 170 },
-];
-
-const DROPOFFS = [
-  { en: "AIU Campus", ar: "الجامعة" },
-  { en: "Iskan Motamayez (AIU Dorms)", ar: "اسكان متميز (سكن الجامعة)" },
-  { en: "Sakan Masr (Oppo)", ar: "سكن مصر (أمام أوبو)" },
-  { en: "Porto Golf (Entrance)", ar: "بورتو جولف (البوابة)" },
-];
-
-const getPrice = (locName: string) => LOCATIONS.find(l => l.en === locName)?.price || 0;
+// ── Types ─────────────────────────────────────────────────────────────────────
+interface PickupLocation { _id: string; name: string; arabicName: string; fare: number; }
+interface DropoffLocation { _id: string; name: string; arabicName: string; }
 
 // ── Validation Schema ─────────────────────────────────────────────────────────
 const bookingSchema = z.object({
@@ -50,6 +36,14 @@ export default function StudentPortal() {
   const { t, isRTL } = useLang();
   const { student, logout, isLoading } = useStudent();
   const [activeTab, setActiveTab] = useState<"book" | "history">("book");
+
+  // Dynamic locations from API
+  const [pickupLocations, setPickupLocations] = useState<PickupLocation[]>([]);
+  const [dropoffLocations, setDropoffLocations] = useState<DropoffLocation[]>([]);
+  const [locationsLoading, setLocationsLoading] = useState(true);
+
+  // Sheet modal
+  const [sheetBooking, setSheetBooking] = useState<any | null>(null);
 
   // Booking Wizard State
   const [step, setStep] = useState(1);
@@ -82,7 +76,7 @@ export default function StudentPortal() {
   });
 
   const selectedPickup = form.watch("pickupLocation");
-  const price = getPrice(selectedPickup);
+  const price = pickupLocations.find(l => l.name === selectedPickup)?.fare ?? 0;
 
   // Pre-fill profile info when student loads
   useEffect(() => {
@@ -91,6 +85,23 @@ export default function StudentPortal() {
       form.setValue("studentPhone", student.phone);
     }
   }, [student, form]);
+
+  // Fetch locations from API on mount
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const res = await api.get("/locations");
+        const all = res.data.data as Array<{ _id: string; name: string; arabicName: string; type: string; fare: number }>;
+        setPickupLocations(all.filter(l => l.type === "pickup") as PickupLocation[]);
+        setDropoffLocations(all.filter(l => l.type === "dropoff") as DropoffLocation[]);
+      } catch (err) {
+        console.error("Failed to fetch locations", err);
+      } finally {
+        setLocationsLoading(false);
+      }
+    };
+    fetchLocations();
+  }, []);
 
   // Fetch available trips
   useEffect(() => {
@@ -255,16 +266,20 @@ export default function StudentPortal() {
                     {/* Quick location picker - updates departure times in the list live */}
                     <div className="space-y-1">
                       <label className="text-xs font-medium text-muted-foreground block">{t("pickupLocation")}</label>
-                      <select
-                        value={selectedPickup}
-                        onChange={e => form.setValue("pickupLocation", e.target.value)}
-                        className="sys-select"
-                      >
-                        <option value="">— Select your area to see times —</option>
-                        {LOCATIONS.map(l => (
-                          <option key={l.en} value={l.en}>{l.en}</option>
-                        ))}
-                      </select>
+                      {locationsLoading ? (
+                        <div className="h-10 rounded-lg bg-white/5 border border-white/10 animate-pulse" />
+                      ) : (
+                        <select
+                          value={selectedPickup}
+                          onChange={e => form.setValue("pickupLocation", e.target.value)}
+                          className="sys-select"
+                        >
+                          <option value="">— Select your area to see times —</option>
+                          {pickupLocations.map(l => (
+                            <option key={l._id} value={l.name}>{l.name}</option>
+                          ))}
+                        </select>
+                      )}
                     </div>
 
                     {loadError ? (
@@ -338,17 +353,24 @@ export default function StudentPortal() {
 
                       <div className="space-y-2">
                         <label className="text-xs font-medium text-muted-foreground block">{t("pickupLocation")}</label>
-                        <div className="grid grid-cols-2 gap-2">
-                          {LOCATIONS.map((loc) => (
-                            <button
-                              key={loc.en} type="button"
-                              onClick={() => form.setValue("pickupLocation", loc.en, { shouldValidate: true })}
-                              className={cn("p-2 text-sm rounded-lg border text-center transition-all", selectedPickup === loc.en ? "border-primary bg-primary/10 text-primary font-medium" : "border-white/10 bg-white/5 hover:border-white/20")}
-                            >
-                              <span className="block">{isRTL ? loc.ar : loc.en}</span>
-                            </button>
-                          ))}
-                        </div>
+                        {locationsLoading ? (
+                          <div className="grid grid-cols-2 gap-2">
+                            {[1,2,3,4].map(i => <div key={i} className="h-12 rounded-lg bg-white/5 border border-white/10 animate-pulse" />)}
+                          </div>
+                        ) : (
+                          <div className="grid grid-cols-2 gap-2">
+                            {pickupLocations.map((loc) => (
+                              <button
+                                key={loc._id} type="button"
+                                onClick={() => form.setValue("pickupLocation", loc.name, { shouldValidate: true })}
+                                className={cn("p-2 text-sm rounded-lg border text-center transition-all", selectedPickup === loc.name ? "border-primary bg-primary/10 text-primary font-medium" : "border-white/10 bg-white/5 hover:border-white/20")}
+                              >
+                                <span className="block">{isRTL && loc.arabicName ? loc.arabicName : loc.name}</span>
+                                {loc.fare > 0 && <span className="block text-xs mt-0.5 font-mono text-muted-foreground">{loc.fare} EGP</span>}
+                              </button>
+                            ))}
+                          </div>
+                        )}
                         {form.formState.errors.pickupLocation && <p className="text-destructive text-xs">{form.formState.errors.pickupLocation.message}</p>}
                       </div>
 
@@ -364,18 +386,24 @@ export default function StudentPortal() {
 
                       <div className="space-y-2">
                         <label className="text-xs font-medium text-muted-foreground block">Drop-off Location / منطقة النزول</label>
-                        <div className="grid grid-cols-1 gap-2">
-                          {DROPOFFS.map((loc) => (
-                            <button
-                              key={loc.en} type="button"
-                              onClick={() => form.setValue("dropoffLocation", loc.en, { shouldValidate: true })}
-                              className={cn("p-2 text-sm rounded-lg border flex justify-between items-center transition-all px-3", form.watch("dropoffLocation") === loc.en ? "border-primary bg-primary/10 text-primary font-medium" : "border-white/10 bg-white/5 hover:border-white/20")}
-                            >
-                              <span>{loc.en}</span>
-                              <span className="text-xs opacity-60">{loc.ar}</span>
-                            </button>
-                          ))}
-                        </div>
+                        {locationsLoading ? (
+                          <div className="space-y-2">
+                            {[1,2].map(i => <div key={i} className="h-11 rounded-lg bg-white/5 border border-white/10 animate-pulse" />)}
+                          </div>
+                        ) : (
+                          <div className="grid grid-cols-1 gap-2">
+                            {dropoffLocations.map((loc) => (
+                              <button
+                                key={loc._id} type="button"
+                                onClick={() => form.setValue("dropoffLocation", loc.name, { shouldValidate: true })}
+                                className={cn("p-2 text-sm rounded-lg border flex justify-between items-center transition-all px-3", form.watch("dropoffLocation") === loc.name ? "border-primary bg-primary/10 text-primary font-medium" : "border-white/10 bg-white/5 hover:border-white/20")}
+                              >
+                                <span>{loc.name}</span>
+                                {loc.arabicName && <span className="text-xs opacity-60">{loc.arabicName}</span>}
+                              </button>
+                            ))}
+                          </div>
+                        )}
                         {form.formState.errors.dropoffLocation && <p className="text-destructive text-xs">{form.formState.errors.dropoffLocation.message}</p>}
                       </div>
 
@@ -545,14 +573,25 @@ export default function StudentPortal() {
                           <p className="font-bold">{b.tripId?.route || "Unknown Route"}</p>
                           <p className="text-xs text-muted-foreground">{new Date(b.createdAt).toLocaleDateString()} · {b.tripId?.departureTime || "--"}</p>
                         </div>
-                        <span className={cn(
-                          "px-2 py-1 rounded text-xs font-medium border",
-                          b.status === "Confirmed" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" :
-                          b.status === "Cancelled" ? "bg-red-500/10 text-red-400 border-red-500/20" :
-                          "bg-amber-400/10 text-amber-400 border-amber-400/20"
-                        )}>
-                          {b.status}
-                        </span>
+                        <div className="flex flex-col items-end gap-1.5">
+                          <span className={cn(
+                            "px-2 py-1 rounded text-xs font-medium border",
+                            b.status === "Confirmed" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" :
+                            b.status === "Cancelled" ? "bg-red-500/10 text-red-400 border-red-500/20" :
+                            "bg-amber-400/10 text-amber-400 border-amber-400/20"
+                          )}>
+                            {b.status}
+                          </span>
+                          {/* See Sheet button — only for confirmed bookings on published trips */}
+                          {b.status === "Confirmed" && b.tripId?.isPublished && (
+                            <button
+                              onClick={() => setSheetBooking(b)}
+                              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-all"
+                            >
+                              <BookOpen size={11} /> See Sheet
+                            </button>
+                          )}
+                        </div>
                       </div>
                       <div className="grid grid-cols-2 gap-2 bg-white/5 rounded-lg p-3 border border-white/5">
                         <div><p className="text-xs text-muted-foreground">Reference</p><p className="font-mono text-primary font-bold">{b.referenceId}</p></div>
@@ -570,6 +609,118 @@ export default function StudentPortal() {
         </div>
       </main>
       <Footer />
+
+      {/* ── See Sheet Modal ──────────────────────────────────────────── */}
+      <AnimatePresence>
+        {sheetBooking && (
+          <motion.div
+            key="sheet-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+            onClick={() => setSheetBooking(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 60, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 60, scale: 0.96 }}
+              transition={{ type: "spring", stiffness: 300, damping: 28 }}
+              className="w-full max-w-sm bg-card border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+              onClick={e => e.stopPropagation()}
+            >
+              {/* Modal header */}
+              <div className="bg-gradient-to-r from-primary/20 to-emerald-500/10 border-b border-white/10 px-5 py-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-primary/20 border border-primary/30 flex items-center justify-center">
+                    <BookOpen size={16} className="text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-sm">{sheetBooking.tripId?.route}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {sheetBooking.tripId?.date ? new Date(sheetBooking.tripId.date).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" }) : ""}
+                      {" · "}{sheetBooking.tripId?.departureTime}
+                    </p>
+                  </div>
+                </div>
+                <button onClick={() => setSheetBooking(null)} className="text-muted-foreground hover:text-foreground p-1 rounded hover:bg-white/10 transition-colors">
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div className="p-5 space-y-4">
+                {/* Seat assignment highlight */}
+                <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 text-center">
+                  <p className="text-xs text-muted-foreground mb-1">Your Assigned Seat{(sheetBooking.seatNumbers?.length || 0) > 1 ? "s" : ""}</p>
+                  <div className="flex gap-2 justify-center flex-wrap">
+                    {(sheetBooking.seatNumbers || [sheetBooking.seatNumber]).map((sn: number) => (
+                      <span key={sn} className="w-10 h-10 rounded-xl bg-primary text-primary-foreground font-black text-lg flex items-center justify-center shadow-lg">
+                        {sn}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-2 font-mono">{sheetBooking.referenceId}</p>
+                </div>
+
+                {/* Vehicle info */}
+                {sheetBooking.vehicleId && (
+                  <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-2">
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium mb-1">
+                      <Bus size={13} /> Vehicle Assignment
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground text-sm">Bus Number</span>
+                      <span className="font-mono font-black text-primary text-lg">{sheetBooking.vehicleId.vehicleNumber}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground text-sm">Driver</span>
+                      <span className="font-semibold">{sheetBooking.vehicleId.driverName}</span>
+                    </div>
+                    {sheetBooking.vehicleId.driverPhone && (
+                      <div className="flex justify-between items-center">
+                        <span className="text-muted-foreground text-sm">Driver Phone</span>
+                        <a href={`tel:${sheetBooking.vehicleId.driverPhone}`} className="font-mono text-primary hover:underline">{sheetBooking.vehicleId.driverPhone}</a>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Pickup / dropoff */}
+                <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-2">
+                  <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium mb-1">
+                    <Navigation size={13} /> Journey Details
+                  </div>
+                  <div className="flex justify-between items-start">
+                    <span className="text-muted-foreground text-sm">Pickup Area</span>
+                    <span className="font-semibold text-right max-w-[55%]">{sheetBooking.pickupLocation}</span>
+                  </div>
+                  <div className="flex justify-between items-start">
+                    <span className="text-muted-foreground text-sm">Exact Address</span>
+                    <span className="text-xs text-right max-w-[55%]">{sheetBooking.pickupAddress}</span>
+                  </div>
+                  <div className="flex justify-between items-start">
+                    <span className="text-muted-foreground text-sm">Drop-off</span>
+                    <span className="text-xs text-right max-w-[55%]">{sheetBooking.dropoffLocation}</span>
+                  </div>
+                </div>
+
+                {/* Amount */}
+                <div className="flex justify-between items-center px-1">
+                  <span className="text-muted-foreground text-sm">{sheetBooking.seatCount} seat{sheetBooking.seatCount > 1 ? "s" : ""} × {sheetBooking.pricePerSeat} EGP</span>
+                  <span className="font-bold text-emerald-400 text-lg">{sheetBooking.amount} EGP</span>
+                </div>
+
+                <button
+                  onClick={() => setSheetBooking(null)}
+                  className="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm font-medium hover:bg-white/10 transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

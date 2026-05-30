@@ -128,6 +128,7 @@ export const manualBooking = async (req: Request, res: Response, next: NextFunct
       studentPhone,
       tripId,
       pickupLocation,
+      pickupAddress: 'Admin Manual Booking', // required field
       dropoffLocation: dropoffLocation || 'University Campus',
       paymentScreenshot: 'admin-manual', // admin bypass — no screenshot needed
     });

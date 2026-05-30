@@ -10,6 +10,7 @@ export interface IUser extends Document {
   role: 'Student' | 'Admin' | 'Supervisor';
   isActive: boolean;
   // ── Student-specific fields ────────────────────────────────
+  studentNumber?: string;
   relativePhone?: string;   // parent/guardian contact
   // ──────────────────────────────────────────────────────────
   createdAt: Date;
@@ -31,6 +32,7 @@ const userSchema = new Schema<IUser>(
     },
     isActive: { type: Boolean, default: true },
     // Student-specific
+    studentNumber: { type: String, unique: true, sparse: true, trim: true },
     relativePhone: { type: String },
   },
   { timestamps: true }
