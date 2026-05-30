@@ -79,10 +79,10 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         <nav className="flex-1 p-4 space-y-1">
           <NavItem href="/admin/dashboard" icon={<Home size={18} />} label={t('overview')} active={pathname === "/admin/dashboard"} />
           <NavItem href="/admin/trips" icon={<Route size={18} />} label={t('trips')} active={pathname.startsWith("/admin/trips")} />
-          <NavItem href="/admin/locations" icon={<MapPin size={18} />} label="Locations & Fares" active={pathname.startsWith("/admin/locations")} />
+          <NavItem href="/admin/locations" icon={<MapPin size={18} />} label={t('locationsFares')} active={pathname.startsWith("/admin/locations")} />
           <NavItem href="/admin/vehicles" icon={<Bus size={18} />} label={t('vehicles')} active={pathname.startsWith("/admin/vehicles")} />
           <NavItem href="/admin/students" icon={<Users size={18} />} label={t('students')} active={pathname.startsWith("/admin/students")} />
-          <NavItem href="/admin/bookings" icon={<BookOpen size={18} />} label="Bookings" active={pathname.startsWith("/admin/bookings")} />
+          <NavItem href="/admin/bookings" icon={<BookOpen size={18} />} label={t('bookings')} active={pathname.startsWith("/admin/bookings")} />
           <NavItem href="/admin/reports" icon={<BarChart3 size={18} />} label={t('reportsExport')} active={pathname.startsWith("/admin/reports")} />
           {user?.role === "Supervisor" && (
             <NavItem href="/admin/admins" icon={<ShieldCheck size={18} />} label={t('manageAdmins')} active={pathname.startsWith("/admin/admins")} supervisor />

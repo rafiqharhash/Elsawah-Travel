@@ -241,13 +241,13 @@ export default function StudentPortal() {
             onClick={() => { setActiveTab("book"); resetFlow(); }}
             className={cn("flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2", activeTab === "book" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:text-foreground")}
           >
-            <Plus size={16} /> Book Ride
+            <Plus size={16} /> {t("bookTrip")}
           </button>
           <button
             onClick={() => setActiveTab("history")}
             className={cn("flex-1 py-2 text-sm font-medium rounded-lg transition-all flex items-center justify-center gap-2", activeTab === "history" ? "bg-primary text-primary-foreground shadow-md" : "text-muted-foreground hover:text-foreground")}
           >
-            <FileText size={16} /> My Bookings
+            <FileText size={16} /> {t("bookingHistory")}
           </button>
         </div>
 
@@ -260,7 +260,7 @@ export default function StudentPortal() {
                   <motion.div key="s1" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="space-y-4">
                     <div>
                       <h2 className="text-lg font-bold">{t("step1Title")}</h2>
-                      <p className="text-sm text-muted-foreground">Available routes for today</p>
+                      <p className="text-sm text-muted-foreground">{t("availableRoutes")}</p>
                     </div>
 
                     {/* Quick location picker - updates departure times in the list live */}
@@ -274,7 +274,7 @@ export default function StudentPortal() {
                           onChange={e => form.setValue("pickupLocation", e.target.value)}
                           className="sys-select"
                         >
-                          <option value="">— Select your area to see times —</option>
+                          <option value="">{t("selectAreaTimes")}</option>
                           {pickupLocations.map(l => (
                             <option key={l._id} value={l.name}>{l.name}</option>
                           ))}
@@ -283,10 +283,10 @@ export default function StudentPortal() {
                     </div>
 
                     {loadError ? (
-                      <p className="text-destructive text-sm text-center py-4">Failed to load trips.</p>
+                      <p className="text-destructive text-sm text-center py-4">{t("failedToLoadTrips")}</p>
                     ) : availableTrips.length === 0 ? (
                       <div className="text-center py-10 bg-white/5 rounded-xl border border-white/10">
-                        <p className="text-muted-foreground text-sm">No trips available at the moment.</p>
+                        <p className="text-muted-foreground text-sm">{t("noTripsAvail")}</p>
                       </div>
                     ) : (
                       <div className="space-y-3">
@@ -327,7 +327,7 @@ export default function StudentPortal() {
                     <button onClick={() => setStep(1)} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground">← {t("back")}</button>
                     <div>
                       <h2 className="text-lg font-bold">{t("step2Title")}</h2>
-                      <p className="text-sm text-muted-foreground">Confirm your pickup and drop-off</p>
+                      <p className="text-sm text-muted-foreground">{t("confirmPickupDropoff")}</p>
                     </div>
                     <form onSubmit={form.handleSubmit(() => setStep(3))} className="space-y-4">
                       {/* Trip summary info */}
@@ -385,7 +385,7 @@ export default function StudentPortal() {
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-xs font-medium text-muted-foreground block">Drop-off Location / منطقة النزول</label>
+                        <label className="text-xs font-medium text-muted-foreground block">{t("dropoffLocation")}</label>
                         {locationsLoading ? (
                           <div className="space-y-2">
                             {[1,2].map(i => <div key={i} className="h-11 rounded-lg bg-white/5 border border-white/10 animate-pulse" />)}
@@ -409,25 +409,25 @@ export default function StudentPortal() {
 
                       {selectedPickup && (
                         <div className="space-y-2">
-                          <label className="text-xs font-medium text-muted-foreground block">Number of Seats</label>
+                          <label className="text-xs font-medium text-muted-foreground block">{t("numSeats")}</label>
                           <div className="flex items-center gap-4 p-3 rounded-xl border border-white/10 bg-white/5">
                             <button type="button" onClick={() => setSeatCount(c => Math.max(1, c - 1))} className="w-9 h-9 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 flex items-center justify-center text-lg font-bold" disabled={seatCount <= 1}>−</button>
                             <div className="flex-1 text-center">
                               <p className="text-2xl font-black">{seatCount}</p>
-                              <p className="text-xs text-muted-foreground">{seatCount === 1 ? "seat" : "seats"}</p>
+                              <p className="text-xs text-muted-foreground">{seatCount === 1 ? t("seat") : t("seats")}</p>
                             </div>
                             <button type="button" onClick={() => setSeatCount(c => Math.min(6, Math.max(1, (selectedTrip?.totalCapacity ?? 6) - (selectedTrip?.totalBooked ?? 0)), c + 1))} className="w-9 h-9 rounded-lg border border-white/20 bg-white/5 hover:bg-white/10 flex items-center justify-center text-lg font-bold" disabled={seatCount >= Math.min(6, (selectedTrip?.totalCapacity ?? 6) - (selectedTrip?.totalBooked ?? 0))}>+</button>
                           </div>
                           {seatCount > 1 && (
                             <div className="flex justify-between items-center px-1 text-sm">
                               <span className="text-muted-foreground">{seatCount} × {price} EGP</span>
-                              <span className="font-bold text-primary text-lg">{seatCount * price} EGP total</span>
+                              <span className="font-bold text-primary text-lg">{seatCount * price} {t("egpTotal")}</span>
                             </div>
                           )}
                         </div>
                       )}
 
-                      <Button type="submit" className="w-full mt-4">Continue to Payment →</Button>
+                      <Button type="submit" className="w-full mt-4">{t("continueToPayment")}</Button>
                     </form>
                   </motion.div>
                 )}
@@ -440,29 +440,29 @@ export default function StudentPortal() {
                     <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 text-center space-y-1">
                       {seatCount > 1 ? (
                         <>
-                          <p className="text-xs text-muted-foreground">{seatCount} seats × {price} EGP each · <strong>{selectedPickup}</strong></p>
+                          <p className="text-xs text-muted-foreground">{seatCount} {t("seats")} × {price} {t("egpEach")} · <strong>{selectedPickup}</strong></p>
                           <p className="text-4xl font-black text-primary">{seatCount * price} <span className="text-xl font-semibold">EGP</span></p>
-                          <p className="text-xs text-muted-foreground">total amount due</p>
+                          <p className="text-xs text-muted-foreground">{t("totalAmountDue")}</p>
                         </>
                       ) : (
                         <>
-                          <p className="text-sm text-muted-foreground mb-1">Amount due for <strong>{selectedPickup}</strong></p>
+                          <p className="text-sm text-muted-foreground mb-1">{t("amountDueFor")} <strong>{selectedPickup}</strong></p>
                           <p className="text-4xl font-black text-primary">{price} <span className="text-xl font-semibold">EGP</span></p>
                         </>
                       )}
                     </div>
 
                     <div className="rounded-lg border border-white/10 bg-white/5 p-4 space-y-2 text-sm">
-                      <p className="font-semibold text-foreground">Payment Instructions</p>
-                      <p className="text-muted-foreground">Transfer <strong className="text-foreground">{seatCount * price} EGP</strong> via Instapay / Vodafone Cash to:</p>
+                      <p className="font-semibold text-foreground">{t("paymentInstructions")}</p>
+                      <p className="text-muted-foreground">{t("transfer")} <strong className="text-foreground">{seatCount * price} EGP</strong> {t("viaInstapay")}</p>
                       <div className="font-mono bg-white/5 border border-white/10 rounded px-3 py-2 text-primary text-center text-lg font-bold tracking-widest">
                         01XX-XXX-XXXX
                       </div>
-                      <p className="text-muted-foreground text-xs">Then take a screenshot of the transaction confirmation and upload it below.</p>
+                      <p className="text-muted-foreground text-xs">{t("takeScreenshot")}</p>
                     </div>
 
                     <div>
-                      <label className="text-xs font-medium text-muted-foreground block mb-2">Payment Screenshot *</label>
+                      <label className="text-xs font-medium text-muted-foreground block mb-2">{t("paymentScreenshot")}</label>
                       <input ref={fileInputRef} type="file" accept="image/*,.pdf" className="hidden" onChange={handleFileChange} />
                       {screenshotPreview ? (
                         <div className="relative rounded-xl overflow-hidden border border-white/10 group aspect-video bg-black/20">
@@ -476,7 +476,7 @@ export default function StudentPortal() {
                       ) : (
                         <button onClick={() => fileInputRef.current?.click()} className="w-full py-10 border-2 border-dashed border-white/20 rounded-xl hover:border-primary/50 hover:bg-white/5 transition-all flex flex-col items-center gap-2 group">
                           <Upload size={24} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                          <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">Tap to upload screenshot</span>
+                          <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">{t("tapToUpload")}</span>
                         </button>
                       )}
                     </div>
@@ -509,45 +509,45 @@ export default function StudentPortal() {
                     <AnimatePresence mode="wait">
                       {bookingStatus === "Confirmed" ? (
                         <motion.div key="t-c" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-                          <h2 className="text-2xl font-bold text-emerald-400">Booking Confirmed! 🎉</h2>
-                          <p className="text-muted-foreground text-sm mt-1">Your payment was verified. Your seat is secured.</p>
+                          <h2 className="text-2xl font-bold text-emerald-400">{t("bookingConfirmedTitle")}</h2>
+                          <p className="text-muted-foreground text-sm mt-1">{t("paymentVerifiedMsg")}</p>
                         </motion.div>
                       ) : bookingStatus === "Cancelled" ? (
                         <motion.div key="t-x" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-                          <h2 className="text-2xl font-bold text-red-400">Booking Rejected</h2>
-                          <p className="text-muted-foreground text-sm mt-1">Payment could not be verified. Your seat has been released.</p>
+                          <h2 className="text-2xl font-bold text-red-400">{t("bookingRejectedTitle")}</h2>
+                          <p className="text-muted-foreground text-sm mt-1">{t("paymentFailedMsg")}</p>
                         </motion.div>
                       ) : (
                         <motion.div key="t-p">
-                          <h2 className="text-2xl font-bold text-amber-400">Under Review</h2>
-                          <p className="text-muted-foreground text-sm mt-1">Your seat is reserved and pending payment verification.</p>
+                          <h2 className="text-2xl font-bold text-amber-400">{t("underReviewTitle")}</h2>
+                          <p className="text-muted-foreground text-sm mt-1">{t("underReviewMsg")}</p>
                         </motion.div>
                       )}
                     </AnimatePresence>
 
                     <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-left space-y-2.5 text-sm">
-                      <div className="flex justify-between"><span className="text-muted-foreground">Reference</span><span className="font-mono text-primary font-bold">{bookingResult.referenceId}</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Seats ({bookingResult.seatCount})</span><span className="font-bold font-mono text-primary">{(bookingResult.seatNumbers as number[]).join(", ")}</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Pickup Area</span><span>{bookingResult.pickupLocation}</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Exact Address</span><span className="text-xs text-right max-w-[55%]">{bookingResult.pickupAddress}</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Drop-off</span><span className="text-xs text-right max-w-[55%]">{bookingResult.dropoffLocation}</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">{t("reference")}</span><span className="font-mono text-primary font-bold">{bookingResult.referenceId}</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">{t("seats")} ({bookingResult.seatCount})</span><span className="font-bold font-mono text-primary">{(bookingResult.seatNumbers as number[]).join(", ")}</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">{t("pickupArea")}</span><span>{bookingResult.pickupLocation}</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">{t("exactAddress")}</span><span className="text-xs text-right max-w-[55%]">{bookingResult.pickupAddress}</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">{t("dropoffLocation")}</span><span className="text-xs text-right max-w-[55%]">{bookingResult.dropoffLocation}</span></div>
                       <div className="flex justify-between text-xs text-muted-foreground"><span>{bookingResult.seatCount} × {bookingResult.pricePerSeat} EGP</span></div>
-                      <div className="flex justify-between"><span className="text-muted-foreground">Total</span><span className="font-bold text-emerald-400">{bookingResult.amount} EGP</span></div>
+                      <div className="flex justify-between"><span className="text-muted-foreground">{t("total")}</span><span className="font-bold text-emerald-400">{bookingResult.amount} EGP</span></div>
                       <div className="flex justify-between items-center">
-                        <span className="text-muted-foreground">Status</span>
+                        <span className="text-muted-foreground">{t("status")}</span>
                         <AnimatePresence mode="wait">
                           {bookingStatus === "Confirmed" ? (
-                            <motion.span key="b-c" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"><CheckCircle2 size={10} /> Confirmed</motion.span>
+                            <motion.span key="b-c" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"><CheckCircle2 size={10} /> {t("completedStatus")}</motion.span>
                           ) : bookingStatus === "Cancelled" ? (
-                            <motion.span key="b-x" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20"><XCircle size={10} /> Cancelled</motion.span>
+                            <motion.span key="b-x" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20"><XCircle size={10} /> {t("cancelledStatus")}</motion.span>
                           ) : (
-                            <motion.span key="b-p" className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-400/10 text-amber-400 border border-amber-400/20"><Clock size={10} /> Pending Approval</motion.span>
+                            <motion.span key="b-p" className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-amber-400/10 text-amber-400 border border-amber-400/20"><Clock size={10} /> {t("pendingApproval")}</motion.span>
                           )}
                         </AnimatePresence>
                       </div>
                     </div>
 
-                    <Button variant="outline" onClick={resetFlow} className="w-full mt-4 bg-transparent">Book Another Ride</Button>
+                    <Button variant="outline" onClick={resetFlow} className="w-full mt-4 bg-transparent">{t("bookAnotherRide")}</Button>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -556,13 +556,13 @@ export default function StudentPortal() {
 
           {activeTab === "history" && (
             <div className="space-y-4">
-              <h2 className="text-lg font-bold px-2">Booking History</h2>
+              <h2 className="text-lg font-bold px-2">{t("bookingHistory")}</h2>
               {isLoadingBookings ? (
                 <div className="flex justify-center py-10"><div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" /></div>
               ) : myBookings.length === 0 ? (
                 <div className="glass-card p-10 text-center text-muted-foreground">
                   <FileText size={32} className="mx-auto mb-3 opacity-50" />
-                  <p>You haven't booked any rides yet.</p>
+                  <p>{t("noRidesYet")}</p>
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -570,7 +570,7 @@ export default function StudentPortal() {
                     <div key={b._id} className="glass-card p-4 text-sm flex flex-col gap-3">
                       <div className="flex justify-between items-start">
                         <div>
-                          <p className="font-bold">{b.tripId?.route || "Unknown Route"}</p>
+                          <p className="font-bold">{b.tripId?.route || t("unknownRoute")}</p>
                           <p className="text-xs text-muted-foreground">{new Date(b.createdAt).toLocaleDateString()} · {b.tripId?.departureTime || "--"}</p>
                         </div>
                         <div className="flex flex-col items-end gap-1.5">
@@ -580,7 +580,7 @@ export default function StudentPortal() {
                             b.status === "Cancelled" ? "bg-red-500/10 text-red-400 border-red-500/20" :
                             "bg-amber-400/10 text-amber-400 border-amber-400/20"
                           )}>
-                            {b.status}
+                            {b.status === "Confirmed" ? t("completedStatus") : b.status === "Cancelled" ? t("cancelledStatus") : t("pendingApproval")}
                           </span>
                           {/* See Sheet button — only for confirmed bookings on published trips */}
                           {b.status === "Confirmed" && b.tripId?.isPublished && (
@@ -588,17 +588,17 @@ export default function StudentPortal() {
                               onClick={() => setSheetBooking(b)}
                               className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-all"
                             >
-                              <BookOpen size={11} /> See Sheet
+                              <BookOpen size={11} /> {t("seeSheet")}
                             </button>
                           )}
                         </div>
                       </div>
                       <div className="grid grid-cols-2 gap-2 bg-white/5 rounded-lg p-3 border border-white/5">
-                        <div><p className="text-xs text-muted-foreground">Reference</p><p className="font-mono text-primary font-bold">{b.referenceId}</p></div>
-                        <div className="col-span-2"><p className="text-xs text-muted-foreground">Total</p><p className="font-semibold">{b.amount} EGP</p></div>
-                        <div className="col-span-2"><p className="text-xs text-muted-foreground">Pickup Location</p><p>{b.pickupLocation} - {b.pickupAddress}</p></div>
-                        <div><p className="text-xs text-muted-foreground">Seats ({b.seatCount})</p><p className="font-mono">{b.seatNumbers?.join(", ") || b.seatNumber}</p></div>
-                        <div><p className="text-xs text-muted-foreground">Vehicle</p><p>{b.vehicleId?.vehicleNumber || "Pending"}</p></div>
+                        <div><p className="text-xs text-muted-foreground">{t("reference")}</p><p className="font-mono text-primary font-bold">{b.referenceId}</p></div>
+                        <div className="col-span-2"><p className="text-xs text-muted-foreground">{t("total")}</p><p className="font-semibold">{b.amount} EGP</p></div>
+                        <div className="col-span-2"><p className="text-xs text-muted-foreground">{t("pickupLocation")}</p><p>{b.pickupLocation} - {b.pickupAddress}</p></div>
+                        <div><p className="text-xs text-muted-foreground">{t("seats")} ({b.seatCount})</p><p className="font-mono">{b.seatNumbers?.join(", ") || b.seatNumber}</p></div>
+                        <div><p className="text-xs text-muted-foreground">{t("vehicleAssignment")}</p><p>{b.vehicleId?.vehicleNumber || t("pendingApproval")}</p></div>
                       </div>
                     </div>
                   ))}
@@ -651,7 +651,7 @@ export default function StudentPortal() {
               <div className="p-5 space-y-4">
                 {/* Seat assignment highlight */}
                 <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 text-center">
-                  <p className="text-xs text-muted-foreground mb-1">Your Assigned Seat{(sheetBooking.seatNumbers?.length || 0) > 1 ? "s" : ""}</p>
+                  <p className="text-xs text-muted-foreground mb-1">{(sheetBooking.seatNumbers?.length || 0) > 1 ? t("yourAssignedSeats") : t("yourAssignedSeat")}</p>
                   <div className="flex gap-2 justify-center flex-wrap">
                     {(sheetBooking.seatNumbers || [sheetBooking.seatNumber]).map((sn: number) => (
                       <span key={sn} className="w-10 h-10 rounded-xl bg-primary text-primary-foreground font-black text-lg flex items-center justify-center shadow-lg">
@@ -666,19 +666,19 @@ export default function StudentPortal() {
                 {sheetBooking.vehicleId && (
                   <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-2">
                     <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium mb-1">
-                      <Bus size={13} /> Vehicle Assignment
+                      <Bus size={13} /> {t("vehicleAssignment")}
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground text-sm">Bus Number</span>
+                      <span className="text-muted-foreground text-sm">{t("busNumber")}</span>
                       <span className="font-mono font-black text-primary text-lg">{sheetBooking.vehicleId.vehicleNumber}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground text-sm">Driver</span>
+                      <span className="text-muted-foreground text-sm">{t("driver")}</span>
                       <span className="font-semibold">{sheetBooking.vehicleId.driverName}</span>
                     </div>
                     {sheetBooking.vehicleId.driverPhone && (
                       <div className="flex justify-between items-center">
-                        <span className="text-muted-foreground text-sm">Driver Phone</span>
+                        <span className="text-muted-foreground text-sm">{t("driverPhone")}</span>
                         <a href={`tel:${sheetBooking.vehicleId.driverPhone}`} className="font-mono text-primary hover:underline">{sheetBooking.vehicleId.driverPhone}</a>
                       </div>
                     )}
@@ -688,25 +688,25 @@ export default function StudentPortal() {
                 {/* Pickup / dropoff */}
                 <div className="rounded-xl border border-white/10 bg-white/5 p-4 space-y-2">
                   <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium mb-1">
-                    <Navigation size={13} /> Journey Details
+                    <Navigation size={13} /> {t("journeyDetails")}
                   </div>
                   <div className="flex justify-between items-start">
-                    <span className="text-muted-foreground text-sm">Pickup Area</span>
+                    <span className="text-muted-foreground text-sm">{t("pickupArea")}</span>
                     <span className="font-semibold text-right max-w-[55%]">{sheetBooking.pickupLocation}</span>
                   </div>
                   <div className="flex justify-between items-start">
-                    <span className="text-muted-foreground text-sm">Exact Address</span>
+                    <span className="text-muted-foreground text-sm">{t("exactAddress")}</span>
                     <span className="text-xs text-right max-w-[55%]">{sheetBooking.pickupAddress}</span>
                   </div>
                   <div className="flex justify-between items-start">
-                    <span className="text-muted-foreground text-sm">Drop-off</span>
+                    <span className="text-muted-foreground text-sm">{t("dropoffLocation")}</span>
                     <span className="text-xs text-right max-w-[55%]">{sheetBooking.dropoffLocation}</span>
                   </div>
                 </div>
 
                 {/* Amount */}
                 <div className="flex justify-between items-center px-1">
-                  <span className="text-muted-foreground text-sm">{sheetBooking.seatCount} seat{sheetBooking.seatCount > 1 ? "s" : ""} × {sheetBooking.pricePerSeat} EGP</span>
+                  <span className="text-muted-foreground text-sm">{sheetBooking.seatCount} {sheetBooking.seatCount > 1 ? t("seats") : t("seat")} × {sheetBooking.pricePerSeat} EGP</span>
                   <span className="font-bold text-emerald-400 text-lg">{sheetBooking.amount} EGP</span>
                 </div>
 
@@ -714,7 +714,7 @@ export default function StudentPortal() {
                   onClick={() => setSheetBooking(null)}
                   className="w-full py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm font-medium hover:bg-white/10 transition-colors"
                 >
-                  Close
+                  {t("close")}
                 </button>
               </div>
             </motion.div>

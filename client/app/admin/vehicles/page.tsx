@@ -16,8 +16,10 @@ interface Vehicle {
   capacity: number;
   assignedTrips?: { _id: string; route: string; departureTime: string; status: string }[];
 }
+import { useLang } from "@/app/providers";
 
 export default function VehiclesPage() {
+  const { t } = useLang();
   const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
@@ -78,19 +80,19 @@ export default function VehiclesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Vehicle Fleet</h2>
+          <h2 className="text-3xl font-bold tracking-tight">{t("vehicleFleet")}</h2>
           <p className="text-muted-foreground mt-1">
-            Add buses to your fleet, then assign them to trips when creating a trip.
+            {t("vehicleFleetDesc")}
           </p>
         </div>
         <Button onClick={() => { resetForm(); setShowModal(true); }} className="gap-2">
-          <Plus size={16} /> Add to Fleet
+          <Plus size={16} /> {t("addToFleet")}
         </Button>
       </div>
 
       <div className="relative max-w-sm">
         <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-        <Input value={search} onChange={e => handleSearch(e.target.value)} placeholder="Search plate or driver..." className="pl-9 bg-white/5 border-white/10" />
+        <Input value={search} onChange={e => handleSearch(e.target.value)} placeholder={`${t("search")}...`} className="pl-9 bg-white/5 border-white/10" />
       </div>
 
       <Card className="border-white/5 bg-card/30 backdrop-blur-xl">
@@ -100,24 +102,24 @@ export default function VehiclesPage() {
               <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
             </div>
           ) : isError ? (
-            <div className="text-center py-16 text-destructive">Failed to load vehicles. Make sure you are logged in.</div>
+            <div className="text-center py-16 text-destructive">{t("error")}</div>
           ) : vehicles.length === 0 ? (
             <div className="text-center py-16 space-y-3">
               <Bus size={40} className="mx-auto text-muted-foreground/40" />
-              <p className="text-muted-foreground font-medium">Your fleet is empty.</p>
-              <p className="text-sm text-muted-foreground">Add buses here first, then assign them to trips.</p>
+              <p className="text-muted-foreground font-medium">{t("fleetEmpty")}</p>
+              <p className="text-sm text-muted-foreground">{t("fleetEmptyDesc")}</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-white/5 text-muted-foreground">
-                    <th className="text-left py-3 px-4 font-medium">Plate</th>
-                    <th className="text-left py-3 px-4 font-medium">Driver</th>
-                    <th className="text-left py-3 px-4 font-medium">Phone</th>
-                    <th className="text-left py-3 px-4 font-medium">Capacity</th>
-                    <th className="text-left py-3 px-4 font-medium">Assigned Trips</th>
-                    <th className="text-left py-3 px-4 font-medium">Actions</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("plate")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("driver")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("phone")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("capacity")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("assignedTrip")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("actions")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -168,24 +170,24 @@ export default function VehiclesPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => { setShowModal(false); resetForm(); }}>
           <div className="bg-card border border-white/10 rounded-xl p-6 w-full max-w-md shadow-2xl" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-5">
-              <h3 className="text-lg font-bold">{editingVehicle ? "Edit Vehicle" : "Add Vehicle to Fleet"}</h3>
+              <h3 className="text-lg font-bold">{editingVehicle ? t("editVehicle") : t("addVehicleToFleet")}</h3>
               <button onClick={() => { setShowModal(false); resetForm(); }} className="text-muted-foreground hover:text-foreground"><X size={18} /></button>
             </div>
             {apiError && <p className="text-destructive text-sm mb-3 p-2 rounded bg-destructive/10">{apiError}</p>}
             <div className="space-y-4">
-              <div><label className="text-sm font-medium mb-1 block">Plate Number</label>
-                <Input value={form.vehicleNumber} onChange={e => setForm(f => ({ ...f, vehicleNumber: e.target.value }))} placeholder="e.g. KHI-1234" className="bg-white/5 border-white/10" /></div>
-              <div><label className="text-sm font-medium mb-1 block">Driver Name</label>
-                <Input value={form.driverName} onChange={e => setForm(f => ({ ...f, driverName: e.target.value }))} placeholder="Full name" className="bg-white/5 border-white/10" /></div>
-              <div><label className="text-sm font-medium mb-1 block">Driver Phone</label>
+              <div><label className="text-sm font-medium mb-1 block">{t("plateNumber")}</label>
+                <Input value={form.vehicleNumber} onChange={e => setForm(f => ({ ...f, vehicleNumber: e.target.value }))} placeholder={t("platePlaceholder")} className="bg-white/5 border-white/10" /></div>
+              <div><label className="text-sm font-medium mb-1 block">{t("driverName")}</label>
+                <Input value={form.driverName} onChange={e => setForm(f => ({ ...f, driverName: e.target.value }))} placeholder={t("driverNamePlaceholder")} className="bg-white/5 border-white/10" /></div>
+              <div><label className="text-sm font-medium mb-1 block">{t("driverPhone")}</label>
                 <Input value={form.driverPhone} onChange={e => setForm(f => ({ ...f, driverPhone: e.target.value }))} placeholder="+921234567890" className="bg-white/5 border-white/10" /></div>
               <p className="text-xs text-muted-foreground border border-white/5 rounded p-2 bg-white/5">
-                🚌 Each vehicle has a fixed capacity of <strong>14 seats</strong>. Assign this vehicle to a trip when creating or editing a trip.
+                🚌 {t("capacityNote")}
               </p>
               <div className="flex gap-3 pt-2">
-                <Button variant="outline" className="flex-1 border-white/10" onClick={() => { setShowModal(false); resetForm(); }}>Cancel</Button>
+                <Button variant="outline" className="flex-1 border-white/10" onClick={() => { setShowModal(false); resetForm(); }}>{t("cancel")}</Button>
                 <Button className="flex-1" onClick={() => editingVehicle ? updateMutation.mutate({ id: editingVehicle._id, body: form }) : createMutation.mutate(form)} disabled={createMutation.isPending || updateMutation.isPending}>
-                  {createMutation.isPending || updateMutation.isPending ? "Saving..." : editingVehicle ? "Update" : "Add to Fleet"}
+                  {createMutation.isPending || updateMutation.isPending ? t("saving") : editingVehicle ? t("update") : t("addToFleet")}
                 </Button>
               </div>
             </div>
@@ -196,12 +198,12 @@ export default function VehiclesPage() {
       {deleteId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <div className="bg-card border border-white/10 rounded-xl p-6 w-full max-w-sm shadow-2xl">
-            <h3 className="text-lg font-bold mb-2">Remove from Fleet?</h3>
-            <p className="text-muted-foreground text-sm mb-5">This vehicle will be permanently removed. Active bookings must be cleared first.</p>
+            <h3 className="text-lg font-bold mb-2">{t("removeFromFleet")}</h3>
+            <p className="text-muted-foreground text-sm mb-5">{t("removeFleetConfirm")}</p>
             <div className="flex gap-3">
-              <Button variant="outline" className="flex-1 border-white/10" onClick={() => setDeleteId(null)}>Cancel</Button>
+              <Button variant="outline" className="flex-1 border-white/10" onClick={() => setDeleteId(null)}>{t("cancel")}</Button>
               <Button variant="destructive" className="flex-1" onClick={() => deleteMutation.mutate(deleteId!)} disabled={deleteMutation.isPending}>
-                {deleteMutation.isPending ? "Removing..." : "Remove"}
+                {t("delete")}
               </Button>
             </div>
           </div>

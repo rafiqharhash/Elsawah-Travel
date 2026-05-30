@@ -27,8 +27,10 @@ interface Trip {
   isPublished: boolean;
   vehicleIds: { _id: string; vehicleNumber: string; driverName: string }[];
 }
+import { useLang } from "@/app/providers";
 
 export default function ReportsPage() {
+  const { t } = useLang();
   const qc = useQueryClient();
   const [downloading, setDownloading] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -50,10 +52,10 @@ export default function ReportsPage() {
       api.patch(`/trips/${id}/publish`, { isPublished }),
     onSuccess: (_, variables) => {
       qc.invalidateQueries({ queryKey: ["all-trips-export"] });
-      setPublishedToast(variables.isPublished ? "Sheet published! Students can now see their assignments." : "Sheet unpublished.");
+      setPublishedToast(variables.isPublished ? t("sheetPublishedSuccess") : t("sheetUnpublished"));
       setTimeout(() => setPublishedToast(null), 3500);
     },
-    onError: (err: any) => setError(err.response?.data?.message || "Publish failed"),
+    onError: (err: any) => setError(err.response?.data?.message || t("publishFailed")),
   });
 
   const trips = (data || []).filter(t => {
@@ -88,7 +90,7 @@ export default function ReportsPage() {
       a.click();
       URL.revokeObjectURL(blobUrl);
     } catch (err: any) {
-      setError(err.response?.data?.message || "Export failed. Please try again.");
+      setError(err.response?.data?.message || t("exportFailed"));
     } finally {
       setDownloading(null);
     }
@@ -97,9 +99,9 @@ export default function ReportsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl font-bold tracking-tight">Reports & Export</h2>
+        <h2 className="text-3xl font-bold tracking-tight">{t("reportsExport")}</h2>
         <p className="text-muted-foreground mt-1">
-          Export a PDF trip sheet for any trip — available at any time, regardless of status.
+          {t("reportsDesc")}
         </p>
       </div>
 
@@ -118,11 +120,9 @@ export default function ReportsPage() {
               <FileDown size={22} className="text-primary" />
             </div>
             <div>
-              <p className="font-semibold text-sm mb-0.5">PDF Trip Sheet</p>
+              <p className="font-semibold text-sm mb-0.5">{t("pdfTripSheet")}</p>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Each PDF contains one page per vehicle. Each page shows the vehicle plate number, driver name &amp; phone,
-                and all 14 seat rows — including each passenger's name, phone, and custom pickup &amp; dropoff location.
-                Empty seats are shown as "Available".
+                {t("pdfTripSheetDesc")}
               </p>
             </div>
           </div>
@@ -136,7 +136,7 @@ export default function ReportsPage() {
           <Input
             value={search}
             onChange={e => setSearch(e.target.value)}
-            placeholder="Search route..."
+            placeholder={`${t("search")}...`}
             className="pl-9 bg-white/5 border-white/10 w-64"
           />
         </div>
@@ -145,9 +145,9 @@ export default function ReportsPage() {
           onChange={e => setStatusFilter(e.target.value)}
           className="rounded-md bg-white/5 border border-white/10 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
         >
-          <option value="">All Statuses</option>
+          <option value="">{t("allStatuses")}</option>
           {["Scheduled", "Active", "Completed", "Cancelled"].map(s => (
-            <option key={s} value={s}>{s}</option>
+            <option key={s} value={s}>{s === "Scheduled" ? t("scheduledStatus") : s === "Active" ? t("activeStatus") : s === "Completed" ? t("completedStatus") : t("cancelledStatus")}</option>
           ))}
         </select>
       </div>
@@ -155,7 +155,7 @@ export default function ReportsPage() {
       {/* Trips Table */}
       <Card className="border-white/5 bg-card/30 backdrop-blur-xl">
         <CardHeader>
-          <CardTitle className="text-base">All Trips</CardTitle>
+          <CardTitle className="text-base">{t("allTrips")}</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           {isLoading ? (
@@ -165,71 +165,71 @@ export default function ReportsPage() {
           ) : trips.length === 0 ? (
             <div className="text-center py-16 text-muted-foreground">
               <FileText size={40} className="mx-auto mb-3 opacity-40" />
-              <p>No trips found.</p>
+              <p>{t("noTrips")}</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-white/5 text-muted-foreground">
-                    <th className="text-left py-3 px-4 font-medium">Route</th>
-                    <th className="text-left py-3 px-4 font-medium">Date &amp; Time</th>
-                    <th className="text-left py-3 px-4 font-medium">Vehicles</th>
-                    <th className="text-left py-3 px-4 font-medium">Status</th>
-                    <th className="text-left py-3 px-4 font-medium">Passengers</th>
-                    <th className="text-left py-3 px-4 font-medium">Publish Sheet</th>
-                    <th className="text-left py-3 px-4 font-medium">Export</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("route")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("dateTime")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("vehicles")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("status")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("passengers")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("publishSheet")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("export")}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {trips.map((t) => (
-                    <tr key={t._id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                      <td className="py-3 px-4 font-medium">{t.route}</td>
+                  {trips.map((trip) => (
+                    <tr key={trip._id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                      <td className="py-3 px-4 font-medium">{trip.route}</td>
                       <td className="py-3 px-4 text-muted-foreground text-xs">
-                        {new Date(t.date).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}
+                        {new Date(trip.date).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}
                         <br />
-                        <span className="font-mono text-primary">{t.departureTime}</span>
+                        <span className="font-mono text-primary">{trip.departureTime}</span>
                       </td>
                       <td className="py-3 px-4">
                         <span className="flex items-center gap-1 text-muted-foreground">
                           <Bus size={12} />
-                          {t.vehicleIds?.length || 0}
-                          {(t.vehicleIds || []).length > 0 && (
+                          {trip.vehicleIds?.length || 0}
+                          {(trip.vehicleIds || []).length > 0 && (
                             <span className="hidden md:inline text-xs ml-1 text-zinc-500">
-                              ({(t.vehicleIds || []).map(v => v.vehicleNumber).join(", ")})
+                              ({(trip.vehicleIds || []).map(v => v.vehicleNumber).join(", ")})
                             </span>
                           )}
                         </span>
                       </td>
                       <td className="py-3 px-4">
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[t.status] || ""}`}>
-                          {t.status}
+                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[trip.status] || ""}`}>
+                          {trip.status}
                         </span>
                       </td>
                       <td className="py-3 px-4">
-                        <span className="font-mono text-primary">{t.totalBooked}</span>
-                        <span className="text-muted-foreground text-xs"> / {t.totalCapacity}</span>
+                        <span className="font-mono text-primary">{trip.totalBooked}</span>
+                        <span className="text-muted-foreground text-xs"> / {trip.totalCapacity}</span>
                         <div className="w-20 h-1.5 bg-white/10 rounded-full mt-1 overflow-hidden">
                           <div
                             className="h-full bg-primary rounded-full"
-                            style={{ width: `${t.occupancyPercentage || 0}%` }}
+                            style={{ width: `${trip.occupancyPercentage || 0}%` }}
                           />
                         </div>
                       </td>
                       {/* Publish toggle */}
                       <td className="py-3 px-4">
                         <button
-                          onClick={() => publishMutation.mutate({ id: t._id, isPublished: !t.isPublished })}
+                          onClick={() => publishMutation.mutate({ id: trip._id, isPublished: !trip.isPublished })}
                           disabled={publishMutation.isPending}
                           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                            t.isPublished
+                            trip.isPublished
                               ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20"
                               : "bg-white/5 text-muted-foreground border-white/10 hover:border-primary/30 hover:text-primary hover:bg-primary/5"
                           }`}
-                          title={t.isPublished ? "Click to unpublish" : "Publish sheet to students"}
+                          title={trip.isPublished ? t("clickUnpublish") : t("publishToStudents")}
                         >
-                          {t.isPublished ? <Globe size={12} /> : <GlobeLock size={12} />}
-                          {t.isPublished ? "Published" : "Publish"}
+                          {trip.isPublished ? <Globe size={12} /> : <GlobeLock size={12} />}
+                          {trip.isPublished ? t("published") : t("publish")}
                         </button>
                       </td>
                       <td className="py-3 px-4">
@@ -239,12 +239,12 @@ export default function ReportsPage() {
                             size="sm"
                             className="gap-1.5 h-7 text-xs bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20"
                             variant="ghost"
-                            onClick={() => handleExport(t._id, "pdf", t.route)}
-                            disabled={downloading === `${t._id}-pdf`}
+                            onClick={() => handleExport(trip._id, "pdf", trip.route)}
+                            disabled={downloading === `${trip._id}-pdf`}
                             title="Download PDF trip sheet"
                           >
                             <FileDown size={12} />
-                            {downloading === `${t._id}-pdf` ? "..." : "PDF"}
+                            {downloading === `${trip._id}-pdf` ? "..." : "PDF"}
                           </Button>
 
                           {/* CSV */}
@@ -252,11 +252,11 @@ export default function ReportsPage() {
                             size="sm"
                             variant="outline"
                             className="gap-1.5 border-white/10 h-7 text-xs"
-                            onClick={() => handleExport(t._id, "csv", t.route)}
-                            disabled={downloading === `${t._id}-csv`}
+                            onClick={() => handleExport(trip._id, "csv", trip.route)}
+                            disabled={downloading === `${trip._id}-csv`}
                           >
                             <FileText size={12} />
-                            {downloading === `${t._id}-csv` ? "..." : "CSV"}
+                            {downloading === `${trip._id}-csv` ? "..." : "CSV"}
                           </Button>
 
                           {/* Excel */}
@@ -264,11 +264,11 @@ export default function ReportsPage() {
                             size="sm"
                             variant="outline"
                             className="gap-1.5 border-white/10 h-7 text-xs text-emerald-400 hover:text-emerald-400"
-                            onClick={() => handleExport(t._id, "excel", t.route)}
-                            disabled={downloading === `${t._id}-excel`}
+                            onClick={() => handleExport(trip._id, "excel", trip.route)}
+                            disabled={downloading === `${trip._id}-excel`}
                           >
                             <FileSpreadsheet size={12} />
-                            {downloading === `${t._id}-excel` ? "..." : "Excel"}
+                            {downloading === `${trip._id}-excel` ? "..." : "Excel"}
                           </Button>
                         </div>
                       </td>

@@ -14,7 +14,7 @@ import { Footer } from "@/components/ui/footer";
 export default function StudentLoginPage() {
   const router = useRouter();
   const { login } = useStudent();
-  const { isRTL } = useLang();
+  const { t, isRTL } = useLang();
 
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +26,7 @@ export default function StudentLoginPage() {
     e.preventDefault();
     setError("");
     if (!phone.trim() || !password) {
-      setError("Please enter your phone number and password.");
+      setError(t("loginError"));
       return;
     }
     setIsLoading(true);
@@ -35,7 +35,7 @@ export default function StudentLoginPage() {
       login(res.data.data.token, res.data.data.student);
       window.location.href = "/student";
     } catch (err: any) {
-      setError(err.response?.data?.message || "Login failed. Please try again.");
+      setError(err.response?.data?.message || t("loginError"));
     } finally {
       setIsLoading(false);
     }
@@ -71,8 +71,8 @@ export default function StudentLoginPage() {
             >
               <GraduationCap size={32} className="text-primary" />
             </motion.div>
-            <h1 className="text-2xl font-bold tracking-tight">Student Portal</h1>
-            <p className="text-muted-foreground text-sm mt-1">Sign in to book your ride</p>
+            <h1 className="text-2xl font-bold tracking-tight">{t("studentLoginTitle")}</h1>
+            <p className="text-muted-foreground text-sm mt-1">{t("studentLoginSubtitle")}</p>
           </div>
 
           {/* Card */}
@@ -97,7 +97,7 @@ export default function StudentLoginPage() {
               {/* Phone Number */}
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-muted-foreground block">
-                  Phone Number
+                  {t("phoneOrStudentNum")}
                 </label>
                 <div className="relative">
                   <GraduationCap size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -106,7 +106,7 @@ export default function StudentLoginPage() {
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="e.g. +1234567890"
+                    placeholder={t("phoneOrStudentNumPlaceholder")}
                     autoComplete="tel"
                     className="w-full pl-9 pr-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-sm placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all"
                   />
@@ -116,7 +116,7 @@ export default function StudentLoginPage() {
               {/* Password */}
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-muted-foreground block">
-                  Password
+                  {t("password")}
                 </label>
                 <div className="relative">
                   <Lock size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -148,23 +148,23 @@ export default function StudentLoginPage() {
                 {isLoading ? (
                   <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
                 ) : (
-                  <>Sign In <ArrowRight size={16} /></>
+                  <>{t("signIn")} <ArrowRight size={16} /></>
                 )}
               </button>
             </form>
 
             <p className="text-center text-xs text-muted-foreground pt-1">
-              Don&apos;t have an account?{" "}
+              {t("noAccount")}{" "}
               <Link href="/student/register" className="text-primary hover:text-primary/80 font-medium transition-colors">
-                Register here
+                {t("registerInstead")}
               </Link>
             </p>
           </motion.div>
 
           <p className="text-center text-xs text-muted-foreground mt-6">
-            Admin?{" "}
+            {t("loginTitle")}?{" "}
             <Link href="/admin" className="text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2">
-              Go to Admin Panel
+              {t("accessDenied")}
             </Link>
           </p>
         </motion.div>

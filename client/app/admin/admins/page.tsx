@@ -9,8 +9,10 @@ import { Input } from "@/components/ui/input";
 import { Plus, Trash2, X, Shield, User, Edit2 } from "lucide-react";
 
 interface Admin { _id: string; name: string; phone: string; username?: string; email?: string; role: string; createdAt: string; }
+import { useLang } from "@/app/providers";
 
 export default function ManageAdminsPage() {
+  const { t } = useLang();
   const queryClient = useQueryClient();
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -73,13 +75,13 @@ export default function ManageAdminsPage() {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <Shield size={18} className="text-purple-400" />
-            <span className="text-xs font-medium text-purple-400 uppercase tracking-widest">Supervisor Only</span>
+            <span className="text-xs font-medium text-purple-400 uppercase tracking-widest">{t("supervisorOnly")}</span>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight">Manage Admins</h2>
-          <p className="text-muted-foreground mt-1">Add or remove admin accounts for the dashboard.</p>
+          <h2 className="text-3xl font-bold tracking-tight">{t("manageAdminsTitle")}</h2>
+          <p className="text-muted-foreground mt-1">{t("manageAdminsPageDesc")}</p>
         </div>
         <Button onClick={() => { closeAndReset(); setShowModal(true); }} className="gap-2 bg-purple-600 hover:bg-purple-700">
-          <Plus size={16} /> Add Admin
+          <Plus size={16} /> {t("addAdmin")}
         </Button>
       </div>
 
@@ -92,19 +94,19 @@ export default function ManageAdminsPage() {
           ) : admins.length === 0 ? (
             <div className="text-center py-16 space-y-3">
               <User size={40} className="mx-auto text-muted-foreground/40" />
-              <p className="text-muted-foreground">No admin accounts yet.</p>
+              <p className="text-muted-foreground">{t("noAdmins")}</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-white/5 text-muted-foreground">
-                    <th className="text-left py-3 px-4 font-medium">Name</th>
-                    <th className="text-left py-3 px-4 font-medium">Username</th>
-                    <th className="text-left py-3 px-4 font-medium">Phone</th>
-                    <th className="text-left py-3 px-4 font-medium">Email</th>
-                    <th className="text-left py-3 px-4 font-medium">Created</th>
-                    <th className="text-left py-3 px-4 font-medium">Actions</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("name")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("username")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("phone")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("email")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("created")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("actions")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -139,30 +141,30 @@ export default function ManageAdminsPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={closeAndReset}>
           <div className="bg-card border border-white/10 rounded-xl p-6 w-full max-w-md shadow-2xl" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-5">
-              <h3 className="text-lg font-bold flex items-center gap-2"><Shield size={18} className="text-purple-400" /> {editingId ? "Edit Admin" : "Create Admin"}</h3>
+              <h3 className="text-lg font-bold flex items-center gap-2"><Shield size={18} className="text-purple-400" /> {editingId ? t("editAdmin") : t("createAdmin")}</h3>
               <button onClick={closeAndReset} className="text-muted-foreground hover:text-foreground"><X size={18} /></button>
             </div>
             {apiError && <p className="text-destructive text-sm mb-3 p-2 rounded bg-destructive/10">{apiError}</p>}
             <div className="space-y-3">
-              <div><label className="text-sm font-medium mb-1 block">Full Name *</label>
-                <Input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Admin Name" className="bg-white/5 border-white/10" /></div>
-              <div><label className="text-sm font-medium mb-1 block">Phone *</label>
+              <div><label className="text-sm font-medium mb-1 block">{t("fullName")} *</label>
+                <Input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="" className="bg-white/5 border-white/10" /></div>
+              <div><label className="text-sm font-medium mb-1 block">{t("phone")} *</label>
                 <Input value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} placeholder="+1234567890" className="bg-white/5 border-white/10" /></div>
-              <div><label className="text-sm font-medium mb-1 block">Username (optional)</label>
-                <Input value={form.username} onChange={e => setForm(f => ({ ...f, username: e.target.value }))} placeholder="e.g. admin2" className="bg-white/5 border-white/10" /></div>
-              <div><label className="text-sm font-medium mb-1 block">Email (optional)</label>
-                <Input type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} placeholder="admin@elsawahtravel.com" className="bg-white/5 border-white/10" /></div>
-              <div><label className="text-sm font-medium mb-1 block">{editingId ? "New Password (leave blank to keep current)" : "Password *"}</label>
-                <Input type="password" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} placeholder="Min 6 characters" className="bg-white/5 border-white/10" /></div>
+              <div><label className="text-sm font-medium mb-1 block">{t("usernameOptional")}</label>
+                <Input value={form.username} onChange={e => setForm(f => ({ ...f, username: e.target.value }))} placeholder="" className="bg-white/5 border-white/10" /></div>
+              <div><label className="text-sm font-medium mb-1 block">{t("emailOptional")}</label>
+                <Input type="email" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} placeholder="" className="bg-white/5 border-white/10" /></div>
+              <div><label className="text-sm font-medium mb-1 block">{editingId ? t("newPassword") : t("password") + " *"}</label>
+                <Input type="password" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} placeholder="" className="bg-white/5 border-white/10" /></div>
               <div className="flex gap-3 pt-2">
-                <Button variant="outline" className="flex-1 border-white/10" onClick={closeAndReset}>Cancel</Button>
+                <Button variant="outline" className="flex-1 border-white/10" onClick={closeAndReset}>{t("cancel")}</Button>
                 {editingId ? (
                   <Button className="flex-1 bg-purple-600 hover:bg-purple-700" onClick={() => updateMutation.mutate({ id: editingId, body: form })} disabled={updateMutation.isPending}>
-                    {updateMutation.isPending ? "Saving..." : "Save Changes"}
+                    {updateMutation.isPending ? t("saving") : t("saveChanges")}
                   </Button>
                 ) : (
                   <Button className="flex-1 bg-purple-600 hover:bg-purple-700" onClick={() => createMutation.mutate(form)} disabled={createMutation.isPending}>
-                    {createMutation.isPending ? "Creating..." : "Create Admin"}
+                    {createMutation.isPending ? t("creating") : t("createAdmin")}
                   </Button>
                 )}
               </div>
@@ -175,12 +177,12 @@ export default function ManageAdminsPage() {
       {deleteId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <div className="bg-card border border-white/10 rounded-xl p-6 w-full max-w-sm shadow-2xl">
-            <h3 className="text-lg font-bold mb-2">Remove Admin?</h3>
-            <p className="text-muted-foreground text-sm mb-5">This admin account will be permanently deleted and they will lose all access.</p>
+            <h3 className="text-lg font-bold mb-2">{t("removeAdmin")}</h3>
+            <p className="text-muted-foreground text-sm mb-5">{t("removeAdminConfirm")}</p>
             <div className="flex gap-3">
-              <Button variant="outline" className="flex-1 border-white/10" onClick={() => setDeleteId(null)}>Cancel</Button>
+              <Button variant="outline" className="flex-1 border-white/10" onClick={() => setDeleteId(null)}>{t("cancel")}</Button>
               <Button variant="destructive" className="flex-1" onClick={() => deleteMutation.mutate(deleteId!)} disabled={deleteMutation.isPending}>
-                {deleteMutation.isPending ? "Removing..." : "Remove Admin"}
+                {deleteMutation.isPending ? t("delete") : t("removeAdmin")}
               </Button>
             </div>
           </div>

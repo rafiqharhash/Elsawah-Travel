@@ -15,7 +15,7 @@ interface Field { id: string; label: string; placeholder: string; type?: string;
 export default function StudentRegisterPage() {
   const router = useRouter();
   const { login } = useStudent();
-  const { isRTL } = useLang();
+  const { t, isRTL } = useLang();
 
   const [form, setForm] = useState({
     name: "", email: "", phone: "",
@@ -55,17 +55,17 @@ export default function StudentRegisterPage() {
       login(res.data.data.token, res.data.data.student);
       window.location.href = "/student";
     } catch (err: any) {
-      setError(err.response?.data?.message || "Registration failed. Please try again.");
+      setError(err.response?.data?.message || t("error"));
     } finally {
       setIsLoading(false);
     }
   };
 
   const fields: Field[] = [
-    { id: "name",          label: "Full Name *",      placeholder: "Ahmed Mohamed",        icon: <User size={15} /> },
-    { id: "email",         label: "Email *",           placeholder: "ahmed@aiu.edu.eg",     type: "email", icon: <Mail size={15} /> },
-    { id: "phone",         label: "Phone Number *",    placeholder: "01XXXXXXXXX",          type: "tel", icon: <Phone size={15} /> },
-    { id: "relativePhone", label: "Parent/Guardian Phone", placeholder: "01XXXXXXXXX (optional)", type: "tel", icon: <Shield size={15} /> },
+    { id: "name",          label: t("fullName") + " *",      placeholder: "Ahmed Mohamed",        icon: <User size={15} /> },
+    { id: "email",         label: t("emailAddress") + " *",   placeholder: t("emailPlaceholder"),     type: "email", icon: <Mail size={15} /> },
+    { id: "phone",         label: t("phoneNumber") + " *",    placeholder: t("phoneNumberPlaceholder"),          type: "tel", icon: <Phone size={15} /> },
+    { id: "relativePhone", label: "Parent/Guardian Phone", placeholder: t("phoneNumberPlaceholder") + " (optional)", type: "tel", icon: <Shield size={15} /> },
   ];
 
   return (
@@ -93,8 +93,8 @@ export default function StudentRegisterPage() {
             >
               <GraduationCap size={28} className="text-primary" />
             </motion.div>
-            <h1 className="text-2xl font-bold tracking-tight">Create Account</h1>
-            <p className="text-muted-foreground text-sm mt-1">Register to book your trip with Elsawah Travel</p>
+            <h1 className="text-2xl font-bold tracking-tight">{t("registerTitle")}</h1>
+            <p className="text-muted-foreground text-sm mt-1">{t("registerSubtitle")}</p>
           </div>
 
           <motion.div
@@ -137,7 +137,7 @@ export default function StudentRegisterPage() {
 
               {/* Password */}
               <div className="space-y-1">
-                <label className="text-xs font-medium text-muted-foreground block">Password *</label>
+                <label className="text-xs font-medium text-muted-foreground block">{t("password")} *</label>
                 <div className="relative">
                   <Lock size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                   <input
@@ -178,14 +178,14 @@ export default function StudentRegisterPage() {
               >
                 {isLoading
                   ? <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                  : <><ArrowRight size={16} /> Create Account</>}
+                  : <><ArrowRight size={16} /> {t("create")}</>}
               </button>
             </form>
 
             <p className="text-center text-xs text-muted-foreground pt-1">
-              Already registered?{" "}
+              {t("alreadyAccount")}{" "}
               <Link href="/student/login" className="text-primary hover:text-primary/80 font-medium transition-colors">
-                Sign in
+                {t("loginInstead")}
               </Link>
             </p>
           </motion.div>

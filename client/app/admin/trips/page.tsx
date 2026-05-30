@@ -21,7 +21,10 @@ const STATUS_COLORS: Record<string, string> = {
   Cancelled: "text-red-400 bg-red-400/10",
 };
 
+import { useLang } from "@/app/providers";
+
 export default function TripsPage() {
+  const { t } = useLang();
   const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
@@ -125,20 +128,20 @@ export default function TripsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Trips</h2>
-          <p className="text-muted-foreground mt-1">Create trips and assign vehicles from your fleet.</p>
+          <h2 className="text-3xl font-bold tracking-tight">{t("tripsTitle")}</h2>
+          <p className="text-muted-foreground mt-1">{t("tripsDesc")}</p>
         </div>
-        <Button onClick={openCreate} className="gap-2"><Plus size={16} /> Create Trip</Button>
+        <Button onClick={openCreate} className="gap-2"><Plus size={16} /> {t("createTrip")}</Button>
       </div>
 
       <div className="flex gap-3 flex-wrap">
         <div className="relative">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-          <Input value={search} onChange={e => handleSearch(e.target.value)} placeholder="Search route..." className="pl-9 bg-white/5 border-white/10 w-64" />
+          <Input value={search} onChange={e => handleSearch(e.target.value)} placeholder={`${t("search")}...`} className="pl-9 bg-white/5 border-white/10 w-64" />
         </div>
         <select value={statusFilter} onChange={e => { setStatusFilter(e.target.value); setPage(1); }} className="sys-select w-auto">
-          <option value="">All Statuses</option>
-          {["Scheduled","Active","Completed","Cancelled"].map(s => <option key={s} value={s}>{s}</option>)}
+          <option value="">{t("allStatuses")}</option>
+          {["Scheduled","Active","Completed","Cancelled"].map(s => <option key={s} value={s}>{s === "Scheduled" ? t("scheduledStatus") : s === "Active" ? t("activeStatus") : s === "Completed" ? t("completedStatus") : t("cancelledStatus")}</option>)}
         </select>
       </div>
 
@@ -147,26 +150,26 @@ export default function TripsPage() {
           {isLoading ? (
             <div className="flex items-center justify-center py-16"><div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" /></div>
           ) : isError ? (
-            <div className="text-center py-16 text-destructive">Failed to load trips.</div>
+            <div className="text-center py-16 text-destructive">{t("error")}</div>
           ) : trips.length === 0 ? (
             <div className="text-center py-16 space-y-3">
               <Route size={40} className="mx-auto text-muted-foreground/40" />
-              <p className="text-muted-foreground font-medium">No trips yet.</p>
-              <p className="text-sm text-muted-foreground">First add vehicles to your fleet, then create a trip.</p>
+              <p className="text-muted-foreground font-medium">{t("noTrips")}</p>
+              <p className="text-sm text-muted-foreground">{t("noTripsHint")}</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-white/5 text-muted-foreground">
-                    <th className="text-left py-3 px-4 font-medium">Route</th>
-                    <th className="text-left py-3 px-4 font-medium">Date</th>
-                    <th className="text-left py-3 px-4 font-medium">Time</th>
-                    <th className="text-left py-3 px-4 font-medium">Vehicles</th>
-                    <th className="text-left py-3 px-4 font-medium">Status</th>
-                    <th className="text-left py-3 px-4 font-medium">Occupancy</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("route")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("date")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("time")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("vehicles")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("status")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("occupancy")}</th>
                     <th className="text-left py-3 px-4 font-medium">Income</th>
-                    <th className="text-left py-3 px-4 font-medium">Actions</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("actions")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -238,22 +241,22 @@ export default function TripsPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={() => { setShowModal(false); resetForm(); }}>
           <div className="bg-card border border-white/10 rounded-xl p-6 w-full max-w-lg shadow-2xl max-h-[90vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-5">
-              <h3 className="text-lg font-bold">{editingTrip ? "Edit Trip" : "Create New Trip"}</h3>
+              <h3 className="text-lg font-bold">{editingTrip ? t("editTrip") : t("createTrip")}</h3>
               <button onClick={() => { setShowModal(false); resetForm(); }} className="text-muted-foreground hover:text-foreground"><X size={18} /></button>
             </div>
             {apiError && <p className="text-destructive text-sm mb-4 p-2 rounded bg-destructive/10">{apiError}</p>}
             <div className="space-y-4">
-              <div><label className="text-sm font-medium mb-1 block">Route</label>
-                <Input value={form.route} onChange={e => setForm(f => ({ ...f, route: e.target.value }))} placeholder="e.g. Campus → City Center" className="bg-white/5 border-white/10" /></div>
+              <div><label className="text-sm font-medium mb-1 block">{t("route")}</label>
+                <Input value={form.route} onChange={e => setForm(f => ({ ...f, route: e.target.value }))} placeholder={t("routePlaceholder")} className="bg-white/5 border-white/10" /></div>
               <div className="grid grid-cols-2 gap-3">
-                <div><label className="text-sm font-medium mb-1 block">Date</label>
+                <div><label className="text-sm font-medium mb-1 block">{t("date")}</label>
                   <Input type="date" value={form.date} onChange={e => setForm(f => ({ ...f, date: e.target.value }))} className="bg-white/5 border-white/10" /></div>
-                <div><label className="text-sm font-medium mb-1 block">Departure Time</label>
+                <div><label className="text-sm font-medium mb-1 block">{t("departureTime")}</label>
                   <Input type="time" value={form.departureTime} onChange={e => setForm(f => ({ ...f, departureTime: e.target.value }))} className="bg-white/5 border-white/10" /></div>
               </div>
-              <div><label className="text-sm font-medium mb-1 block">Status</label>
+              <div><label className="text-sm font-medium mb-1 block">{t("status")}</label>
                 <select value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))} className="sys-select">
-                  {["Scheduled","Active","Completed","Cancelled"].map(s => <option key={s} value={s}>{s}</option>)}
+                  {["Scheduled","Active","Completed","Cancelled"].map(s => <option key={s} value={s}>{s === "Scheduled" ? t("scheduledStatus") : s === "Active" ? t("activeStatus") : s === "Completed" ? t("completedStatus") : t("cancelledStatus")}</option>)}
                 </select>
               </div>
 
@@ -312,14 +315,14 @@ export default function TripsPage() {
               {/* Vehicle multi-select */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-sm font-medium">Assign Vehicles from Fleet</label>
+                  <label className="text-sm font-medium">{t("assignVehicles")}</label>
                   {selectedVehicleIds.length > 0 && (
-                    <span className="text-xs text-primary font-medium">{selectedVehicleIds.length} selected · {previewCapacity} seats total</span>
+                    <span className="text-xs text-primary font-medium">{selectedVehicleIds.length} {t("selectedCount")} · {previewCapacity} {t("seatsTotal")}</span>
                   )}
                 </div>
                 {fleet.length === 0 ? (
                   <div className="border border-white/10 rounded-lg p-4 text-center text-muted-foreground text-sm">
-                    No available vehicles in fleet. <a href="/admin/vehicles" className="text-primary underline">Add vehicles first</a>.
+                    {t("noVehiclesInFleet")}
                   </div>
                 ) : (
                   <div className="border border-white/10 rounded-lg divide-y divide-white/5 max-h-48 overflow-y-auto">
@@ -349,9 +352,9 @@ export default function TripsPage() {
               </div>
 
               <div className="flex gap-3 pt-2">
-                <Button variant="outline" className="flex-1 border-white/10" onClick={() => { setShowModal(false); resetForm(); }}>Cancel</Button>
+                <Button variant="outline" className="flex-1 border-white/10" onClick={() => { setShowModal(false); resetForm(); }}>{t("cancel")}</Button>
                 <Button className="flex-1" onClick={handleSubmit} disabled={createMutation.isPending || updateMutation.isPending}>
-                  {createMutation.isPending || updateMutation.isPending ? "Saving..." : editingTrip ? "Update Trip" : "Create Trip"}
+                  {createMutation.isPending || updateMutation.isPending ? t("saving") : editingTrip ? t("updateTrip") : t("createTrip")}
                 </Button>
               </div>
             </div>
@@ -362,12 +365,12 @@ export default function TripsPage() {
       {deleteId && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
           <div className="bg-card border border-white/10 rounded-xl p-6 w-full max-w-sm shadow-2xl">
-            <h3 className="text-lg font-bold mb-2">Delete Trip?</h3>
-            <p className="text-muted-foreground text-sm mb-5">Assigned vehicles will be returned to the fleet. Trips with bookings cannot be deleted — use Force Cancel instead.</p>
+            <h3 className="text-lg font-bold mb-2">{t("deleteTrip")}</h3>
+            <p className="text-muted-foreground text-sm mb-5">{t("deleteTripConfirm")}</p>
             <div className="flex gap-3">
-              <Button variant="outline" className="flex-1 border-white/10" onClick={() => setDeleteId(null)}>Cancel</Button>
+              <Button variant="outline" className="flex-1 border-white/10" onClick={() => setDeleteId(null)}>{t("cancel")}</Button>
               <Button variant="destructive" className="flex-1" onClick={() => deleteMutation.mutate(deleteId!)} disabled={deleteMutation.isPending}>
-                {deleteMutation.isPending ? "Deleting..." : "Delete"}
+                {t("delete")}
               </Button>
             </div>
           </div>

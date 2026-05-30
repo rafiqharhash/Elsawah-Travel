@@ -8,7 +8,10 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { Users, Bus, Route, TrendingUp, Star, Activity } from "lucide-react";
 import { motion } from "framer-motion";
 
+import { useLang } from "@/app/providers";
+
 export default function DashboardOverview() {
+  const { t } = useLang();
   const [user, setUser] = useState<any>(null);
   const isSupervisor = user?.role === "Supervisor";
 
@@ -55,18 +58,18 @@ export default function DashboardOverview() {
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <Star size={16} className="text-amber-400 fill-amber-400" />
-                <span className="text-xs font-medium text-amber-400 uppercase tracking-widest">Supervisor Access</span>
+                <span className="text-xs font-medium text-amber-400 uppercase tracking-widest">{t("supervisorBadge")}</span>
               </div>
               <h2 className="text-3xl font-bold">
-                Welcome Back, <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Berlin</span> 👋
+                {t("welcomeBack")} <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">{user?.name}</span> 👋
               </h2>
               <p className="text-muted-foreground mt-1 text-sm">
-                You have full control over the Uni-Ride transport system. Here's today's overview.
+                {t("supervisorDesc")}
               </p>
             </div>
             <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/10 border border-primary/20">
               <Activity size={16} className="text-primary" />
-              <span className="text-sm font-medium text-primary">{activeTrips} active trips running</span>
+              <span className="text-sm font-medium text-primary">{activeTrips} {t("activeTripsRunning")}</span>
             </div>
           </div>
         </motion.div>
@@ -75,8 +78,8 @@ export default function DashboardOverview() {
       {/* Standard Admin Header (non-supervisor) */}
       {!isSupervisor && (
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Dashboard Overview</h2>
-          <p className="text-muted-foreground mt-2">Monitor daily Elsawah Travel operations.</p>
+          <h2 className="text-3xl font-bold tracking-tight">{t("dashboardTitle")}</h2>
+          <p className="text-muted-foreground mt-2">{t("dashboardSubtitle")}</p>
         </div>
       )}
 
@@ -87,10 +90,10 @@ export default function DashboardOverview() {
         transition={{ duration: 0.4, delay: 0.1 }}
         className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
       >
-        <StatCard title="Total Students" value={String(totalUsers || "0")} icon={<Users className="text-primary" />} sub="Registered users" />
-        <StatCard title="Active Trips" value={String(activeTrips)} icon={<Route className="text-emerald-400" />} sub={`${totalTrips} total trips`} color="emerald" />
-        <StatCard title="Fleet Status" value={String(totalBooked)} icon={<Bus className="text-amber-400" />} sub="Booked seats" color="amber" />
-        <StatCard title="Avg Occupancy" value={`${avgOccupancy}%`} icon={<TrendingUp className="text-purple-400" />} sub="Capacity utilization" color="purple" />
+        <StatCard title={t("totalStudents")} value={String(totalUsers || "0")} icon={<Users className="text-primary" />} sub={t("registeredUsers")} color="primary" />
+        <StatCard title={t("activeTrips")} value={String(activeTrips)} icon={<Route className="text-emerald-400" />} sub={`${totalTrips} ${t("totalTrips")}`} color="emerald" />
+        <StatCard title={t("fleetVehicles")} value={String(totalBooked)} icon={<Bus className="text-amber-400" />} sub={t("bookingsTotal")} color="amber" />
+        <StatCard title={t("avgOccupancy")} value={`${avgOccupancy}%`} icon={<TrendingUp className="text-purple-400" />} sub="" color="purple" />
       </motion.div>
 
       {/* Charts */}
@@ -102,7 +105,7 @@ export default function DashboardOverview() {
       >
         <Card className="col-span-4 glass-card border-white/5 bg-card/30 backdrop-blur-xl">
           <CardHeader>
-            <CardTitle className="text-base font-semibold">Weekly Booking Activity</CardTitle>
+            <CardTitle className="text-base font-semibold">{t("weeklyActivity")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-[260px] w-full">
@@ -121,12 +124,12 @@ export default function DashboardOverview() {
 
         <Card className="col-span-3 glass-card border-white/5 bg-card/30 backdrop-blur-xl">
           <CardHeader>
-            <CardTitle className="text-base font-semibold">Active Trips Status</CardTitle>
+            <CardTitle className="text-base font-semibold">{t("activeTripsStatus")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3 mt-1">
               {!tripsData || tripsData.filter((t: any) => t.status !== "Completed" && t.status !== "Cancelled").length === 0 ? (
-                <p className="text-sm text-muted-foreground text-center py-8">No active trips.</p>
+                <p className="text-sm text-muted-foreground text-center py-8">{t("noActiveTrips")}</p>
               ) : (
                 tripsData
                   .filter((t: any) => t.status !== "Completed" && t.status !== "Cancelled")
@@ -158,12 +161,12 @@ export default function DashboardOverview() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.3 }}
         >
-          <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
+          <h3 className="text-lg font-semibold mb-4">{t("quickActions")}</h3>
           <div className="grid gap-3 sm:grid-cols-3">
             {[
-              { label: "Manage Admins", desc: "Add or remove admin accounts", href: "/admin/admins", color: "from-purple-500/10 to-transparent border-purple-500/20" },
-              { label: "Manual Booking", desc: "Book a trip on behalf of a student", href: "/admin/students", color: "from-primary/10 to-transparent border-primary/20" },
-              { label: "Fleet Overview", desc: "View and manage all vehicles", href: "/admin/vehicles", color: "from-amber-500/10 to-transparent border-amber-500/20" },
+              { label: t("manageAdmins"), desc: t("manageAdminsDesc"), href: "/admin/admins", color: "from-purple-500/10 to-transparent border-purple-500/20" },
+              { label: t("manualBooking"), desc: t("manualBookingDesc"), href: "/admin/students", color: "from-primary/10 to-transparent border-primary/20" },
+              { label: t("fleetOverview"), desc: t("fleetOverviewDesc"), href: "/admin/vehicles", color: "from-amber-500/10 to-transparent border-amber-500/20" },
             ].map(action => (
               <a key={action.href} href={action.href} className={`block p-4 rounded-xl border bg-gradient-to-br ${action.color} hover:scale-[1.01] transition-transform`}>
                 <p className="font-semibold text-sm">{action.label}</p>

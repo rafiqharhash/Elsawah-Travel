@@ -28,8 +28,10 @@ const DROPOFF_LOCATIONS = [
   { value: "Sakan Masr (Oppo)",           ar: "سكن مصر (أمام أوبو)" },
   { value: "Porto Golf (Entrance)",       ar: "بورتو جولف (البوابة)" },
 ];
+import { useLang } from "@/app/providers";
 
 export default function StudentsPage() {
+  const { t } = useLang();
   const queryClient = useQueryClient();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
@@ -121,21 +123,21 @@ export default function StudentsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Students</h2>
-          <p className="text-muted-foreground mt-1">View all registered user accounts.</p>
+          <h2 className="text-3xl font-bold tracking-tight">{t("studentsTitle")}</h2>
+          <p className="text-muted-foreground mt-1">{t("studentsDesc")}</p>
         </div>
         <Button onClick={() => { resetBooking(); setShowBooking(true); }} className="gap-2">
-          <BookPlus size={16} /> Manual Booking
+          <BookPlus size={16} /> {t("manualBooking")}
         </Button>
       </div>
 
       <div className="flex gap-3 flex-wrap">
         <div className="relative">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
-          <Input value={search} onChange={e => handleSearch(e.target.value)} placeholder="Search by name, email or phone..." className="pl-9 bg-white/5 border-white/10 w-72" />
+          <Input value={search} onChange={e => handleSearch(e.target.value)} placeholder={`${t("search")}...`} className="pl-9 bg-white/5 border-white/10 w-72" />
         </div>
         <select value={roleFilter} onChange={e => { setRoleFilter(e.target.value); setPage(1); }} className="rounded-md bg-white/5 border border-white/10 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary">
-          <option value="">All Roles</option>
+          <option value="">{t("allRoles")}</option>
           {["Student", "Admin", "Supervisor"].map(r => <option key={r} value={r}>{r}</option>)}
         </select>
       </div>
@@ -147,23 +149,23 @@ export default function StudentsPage() {
               <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
             </div>
           ) : isError ? (
-            <div className="text-center py-16 text-destructive">Failed to load users.</div>
+            <div className="text-center py-16 text-destructive">{t("error")}</div>
           ) : users.length === 0 ? (
             <div className="text-center py-16 space-y-3">
               <Users size={40} className="mx-auto text-muted-foreground/40" />
-              <p className="text-muted-foreground">No users found.</p>
+              <p className="text-muted-foreground">{t("noUsers")}</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-white/5 text-muted-foreground">
-                    <th className="text-left py-3 px-4 font-medium">Name</th>
-                    <th className="text-left py-3 px-4 font-medium">Email</th>
-                    <th className="text-left py-3 px-4 font-medium">Phone</th>
-                    <th className="text-left py-3 px-4 font-medium">Role</th>
-                    <th className="text-left py-3 px-4 font-medium">Joined</th>
-                    <th className="text-right py-3 px-4 font-medium">Actions</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("name")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("email")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("phone")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("role")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("joined")}</th>
+                    <th className="text-right py-3 px-4 font-medium">{t("actions")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -193,7 +195,7 @@ export default function StudentsPage() {
                           }}
                           className="text-muted-foreground hover:text-foreground"
                         >
-                          <Edit2 size={14} className="mr-1" /> Edit
+                          <Edit2 size={14} className="mr-1" /> {t("edit")}
                         </Button>
                       </td>
                     </tr>

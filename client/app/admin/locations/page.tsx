@@ -44,8 +44,10 @@ interface LocationPayload {
   fare: number;
   isActive: boolean;
 }
+import { useLang } from "@/app/providers";
 
 export default function LocationsPage() {
+  const { t } = useLang();
   const qc = useQueryClient();
   const [tab, setTab] = useState<"pickup" | "dropoff">("pickup");
   const [showModal, setShowModal] = useState(false);
@@ -151,14 +153,13 @@ export default function LocationsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Locations & Fares</h2>
+          <h2 className="text-3xl font-bold tracking-tight">{t("locationsFares")}</h2>
           <p className="text-muted-foreground mt-1">
-            Manage pickup areas and drop-off points. Changes reflect instantly on
-            the student portal.
+            {t("locationsDesc")}
           </p>
         </div>
         <Button onClick={openCreate} className="gap-2">
-          <Plus size={16} /> Add Location
+          <Plus size={16} /> {t("addLocation")}
         </Button>
       </div>
 
@@ -166,21 +167,21 @@ export default function LocationsPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {[
           {
-            label: "Pickup Locations",
+            label: t("pickupLocations"),
             value: pickups.length,
             active: pickups.filter((l) => l.isActive).length,
             icon: <Navigation size={18} className="text-primary" />,
             color: "from-primary/20 to-primary/5",
           },
           {
-            label: "Drop-off Points",
+            label: t("dropoffPoints"),
             value: dropoffs.length,
             active: dropoffs.filter((l) => l.isActive).length,
             icon: <MapPin size={18} className="text-emerald-400" />,
             color: "from-emerald-500/20 to-emerald-500/5",
           },
           {
-            label: "Avg. Pickup Fare",
+            label: t("avgPickupFare"),
             value:
               pickups.length > 0
                 ? `${Math.round(
@@ -192,7 +193,7 @@ export default function LocationsPage() {
             color: "from-amber-400/20 to-amber-400/5",
           },
           {
-            label: "Price Range",
+            label: t("priceRange"),
             value:
               pickups.length > 0
                 ? `${Math.min(...pickups.map((l) => l.fare))}–${Math.max(
@@ -214,7 +215,7 @@ export default function LocationsPage() {
             <p className="text-2xl font-black">{stat.value}</p>
             {typeof stat.active === "number" && (
               <p className="text-xs text-muted-foreground mt-0.5">
-                {stat.active} active
+                {stat.active} {t("active").toLowerCase()}
               </p>
             )}
           </div>
@@ -223,18 +224,18 @@ export default function LocationsPage() {
 
       {/* Tabs */}
       <div className="flex gap-1 bg-white/5 border border-white/10 rounded-xl p-1 w-fit">
-        {(["pickup", "dropoff"] as const).map((t) => (
+        {(["pickup", "dropoff"] as const).map((type) => (
           <button
-            key={t}
-            onClick={() => setTab(t)}
+            key={type}
+            onClick={() => setTab(type)}
             className={cn(
               "px-5 py-2 text-sm font-medium rounded-lg transition-all capitalize",
-              tab === t
+              tab === type
                 ? "bg-primary text-primary-foreground shadow-md"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >
-            {t === "pickup" ? "Pickup Locations" : "Drop-off Points"}
+            {t(type === "pickup" ? "pickupLocations" : "dropoffPoints")}
           </button>
         ))}
       </div>
@@ -248,16 +249,16 @@ export default function LocationsPage() {
             </div>
           ) : isError ? (
             <p className="text-center py-16 text-destructive">
-              Failed to load locations.
+              {t("error")}
             </p>
           ) : displayed.length === 0 ? (
             <div className="text-center py-16 space-y-3">
               <MapPin size={40} className="mx-auto text-muted-foreground/40" />
               <p className="text-muted-foreground font-medium">
-                No {tab} locations yet.
+                {tab === "pickup" ? t("noPickupLocations") : t("noDropoffLocations")}
               </p>
               <Button variant="outline" size="sm" onClick={openCreate} className="border-white/10">
-                <Plus size={14} className="mr-2" /> Add one
+                <Plus size={14} className="mr-2" /> {t("addOne")}
               </Button>
             </div>
           ) : (
@@ -265,13 +266,13 @@ export default function LocationsPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-white/5 text-muted-foreground">
-                    <th className="text-left py-3 px-5 font-medium">Location Name</th>
-                    <th className="text-left py-3 px-4 font-medium">Arabic Name</th>
+                    <th className="text-left py-3 px-5 font-medium">{t("locationName")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("arabicName")}</th>
                     {tab === "pickup" && (
-                      <th className="text-left py-3 px-4 font-medium">Fare / Seat</th>
+                      <th className="text-left py-3 px-4 font-medium">{t("farePerSeat")}</th>
                     )}
-                    <th className="text-left py-3 px-4 font-medium">Status</th>
-                    <th className="text-left py-3 px-4 font-medium">Actions</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("status")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("actions")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -327,7 +328,7 @@ export default function LocationsPage() {
                             ) : (
                               <XCircle size={11} />
                             )}
-                            {loc.isActive ? "Active" : "Inactive"}
+                            {loc.isActive ? t("active") : t("inactive")}
                           </button>
                         </td>
                         <td className="py-3 px-4">
@@ -335,14 +336,14 @@ export default function LocationsPage() {
                             <button
                               onClick={() => openEdit(loc)}
                               className="p-1.5 rounded hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
-                              title="Edit"
+                              title={t("edit")}
                             >
                               <Edit size={14} />
                             </button>
                             <button
                               onClick={() => setDeleteTarget(loc)}
                               className="p-1.5 rounded hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
-                              title="Delete"
+                              title={t("delete")}
                             >
                               <Trash2 size={14} />
                             </button>
@@ -385,10 +386,10 @@ export default function LocationsPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg">
-                      {editing ? "Edit Location" : "Add Location"}
+                      {editing ? t("editLocation") : t("addLocation")}
                     </h3>
                     <p className="text-xs text-muted-foreground">
-                      Changes apply to the student portal instantly
+                      {t("changesApplyInstantly")}
                     </p>
                   </div>
                 </div>
@@ -410,23 +411,23 @@ export default function LocationsPage() {
                 {/* Type selector — only for new locations */}
                 {!editing && (
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Type</label>
+                    <label className="text-sm font-medium mb-2 block">{t("type")}</label>
                     <div className="flex gap-2">
-                      {(["pickup", "dropoff"] as const).map((t) => (
+                      {(["pickup", "dropoff"] as const).map((type) => (
                         <button
-                          key={t}
+                          key={type}
                           type="button"
                           onClick={() =>
-                            setForm((f) => ({ ...f, type: t }))
+                            setForm((f) => ({ ...f, type: type }))
                           }
                           className={cn(
                             "flex-1 py-2.5 text-sm rounded-xl border font-medium transition-all capitalize",
-                            form.type === t
+                            form.type === type
                               ? "border-primary bg-primary/10 text-primary"
                               : "border-white/10 bg-white/5 text-muted-foreground hover:border-white/20"
                           )}
                         >
-                          {t === "pickup" ? "🚏 Pickup" : "📍 Drop-off"}
+                          {t(type === "pickup" ? "pickupType" : "dropoffType")}
                         </button>
                       ))}
                     </div>
@@ -436,7 +437,7 @@ export default function LocationsPage() {
                 {/* Name */}
                 <div>
                   <label className="text-sm font-medium mb-1 block">
-                    Location Name (English) *
+                    {t("locationNameEnglish")}
                   </label>
                   <Input
                     value={form.name}
@@ -451,8 +452,8 @@ export default function LocationsPage() {
                 {/* Arabic name */}
                 <div>
                   <label className="text-sm font-medium mb-1 block">
-                    Arabic Name
-                    <span className="text-muted-foreground font-normal ml-1">(optional)</span>
+                    {t("arabicName")}
+                    <span className="text-muted-foreground font-normal ml-1">{t("optional")}</span>
                   </label>
                   <Input
                     value={form.arabicName}
@@ -469,7 +470,7 @@ export default function LocationsPage() {
                 {form.type === "pickup" && (
                   <div>
                     <label className="text-sm font-medium mb-1 block">
-                      Fare per Seat (EGP) *
+                      {t("farePerSeatLabel")}
                     </label>
                     <div className="relative">
                       <Input
@@ -500,9 +501,9 @@ export default function LocationsPage() {
                 {/* Active toggle */}
                 <div className="flex items-center justify-between py-3 px-4 rounded-xl border border-white/10 bg-white/5">
                   <div>
-                    <p className="text-sm font-medium">Active</p>
+                    <p className="text-sm font-medium">{t("active")}</p>
                     <p className="text-xs text-muted-foreground">
-                      Inactive locations are hidden from students
+                      {t("inactiveDesc")}
                     </p>
                   </div>
                   <button
@@ -533,7 +534,7 @@ export default function LocationsPage() {
                     className="flex-1 border-white/10"
                     onClick={closeModal}
                   >
-                    Cancel
+                    {t("cancel")}
                   </Button>
                   <Button
                     className="flex-1"
@@ -541,10 +542,10 @@ export default function LocationsPage() {
                     disabled={isPending || !form.name.trim()}
                   >
                     {isPending
-                      ? "Saving…"
+                      ? t("saving")
                       : editing
-                      ? "Save Changes"
-                      : "Create Location"}
+                      ? t("saveChanges")
+                      : t("createLocation")}
                   </Button>
                 </div>
               </div>
@@ -574,16 +575,16 @@ export default function LocationsPage() {
                   <Trash2 size={20} className="text-destructive" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">Delete Location?</h3>
+                  <h3 className="font-bold text-lg">{t("deleteLocation")}</h3>
                   <p className="text-xs text-muted-foreground">
-                    This cannot be undone
+                    {t("cannotBeUndone")}
                   </p>
                 </div>
               </div>
               <p className="text-muted-foreground text-sm mb-5">
-                You are about to delete{" "}
+                {t("aboutToDelete")}{" "}
                 <strong className="text-foreground">{deleteTarget.name}</strong>.
-                Students who selected this location in-progress may be affected.
+                {t("deleteLocationWarning")}
               </p>
               <div className="flex gap-3">
                 <Button
@@ -591,7 +592,7 @@ export default function LocationsPage() {
                   className="flex-1 border-white/10"
                   onClick={() => setDeleteTarget(null)}
                 >
-                  Cancel
+                  {t("cancel")}
                 </Button>
                 <Button
                   variant="destructive"
@@ -599,7 +600,7 @@ export default function LocationsPage() {
                   onClick={() => deleteMutation.mutate(deleteTarget._id)}
                   disabled={deleteMutation.isPending}
                 >
-                  {deleteMutation.isPending ? "Deleting…" : "Delete"}
+                  {deleteMutation.isPending ? t("deleting") : t("delete")}
                 </Button>
               </div>
             </motion.div>

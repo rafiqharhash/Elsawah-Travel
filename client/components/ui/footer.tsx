@@ -2,7 +2,10 @@
 
 import { Heart } from "lucide-react";
 
+import { useLang } from "@/app/providers";
+
 export function Footer() {
+  const { t } = useLang();
   const year = new Date().getFullYear();
 
   return (
@@ -10,10 +13,10 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
         {/* Left: branding */}
         <p className="text-xs text-muted-foreground flex items-center gap-1.5">
-          <span>© {year} Elsawah Travel — Created & developed by</span>
+          <span>© {year} Elsawah Travel — {t("createdBy")}</span>
           <span className="font-semibold text-foreground">Rafiq</span>
           <span className="flex items-center gap-0.5">
-            with <Heart size={11} className="text-red-400 fill-red-400 mx-0.5" /> All rights reserved.
+            {t("withHeart")} <Heart size={11} className="text-red-400 fill-red-400 mx-0.5" /> {t("allRightsReserved")}
           </span>
         </p>
 

@@ -38,8 +38,10 @@ interface Booking {
   vehicleId: { vehicleNumber: string; driverName: string } | null;
   createdAt: string;
 }
+import { useLang } from "@/app/providers";
 
 export default function BookingsPage() {
+  const { t } = useLang();
   const queryClient = useQueryClient();
   const [statusFilter, setStatusFilter] = useState("Pending");
   const [search, setSearch] = useState("");
@@ -63,7 +65,7 @@ export default function BookingsPage() {
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
       setActionError(null);
     },
-    onError: (err: any) => setActionError(err.response?.data?.message || "Confirm failed"),
+    onError: (err: any) => setActionError(err.response?.data?.message || t("confirmFailed")),
   });
 
   const rejectMutation = useMutation({
@@ -72,7 +74,7 @@ export default function BookingsPage() {
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
       setActionError(null);
     },
-    onError: (err: any) => setActionError(err.response?.data?.message || "Reject failed"),
+    onError: (err: any) => setActionError(err.response?.data?.message || t("rejectFailed")),
   });
 
   const bookings = data || [];
@@ -86,13 +88,13 @@ export default function BookingsPage() {
           <div className="flex items-center gap-2 mb-1">
             {pending > 0 && (
               <span className="px-2 py-0.5 rounded-full bg-amber-400/10 text-amber-400 border border-amber-400/20 text-xs font-bold">
-                {pending} pending
+                {pending} {t("pendingBookings")}
               </span>
             )}
           </div>
-          <h2 className="text-3xl font-bold tracking-tight">Booking Approvals</h2>
+          <h2 className="text-3xl font-bold tracking-tight">{t("bookingApprovals")}</h2>
           <p className="text-muted-foreground mt-1">
-            Review payment screenshots and confirm or reject student bookings.
+            {t("bookingApprovalsDesc")}
           </p>
         </div>
       </div>
@@ -110,7 +112,7 @@ export default function BookingsPage() {
           <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search name / phone / ref..."
+            placeholder={`${t("search")}...`}
             className="pl-9 bg-white/5 border-white/10 w-60"
           />
         </div>
@@ -125,7 +127,7 @@ export default function BookingsPage() {
                   : "bg-white/5 text-muted-foreground hover:bg-white/10"
               }`}
             >
-              {s || "All"}
+              {s ? (s === "Pending" ? t("pendingStatus") : s === "Confirmed" ? t("confirmedStatus") : s === "Cancelled" ? t("cancelledStatus") : s) : t("allStatuses")}
             </button>
           ))}
         </div>
@@ -141,7 +143,7 @@ export default function BookingsPage() {
             <div className="text-center py-16 space-y-2">
               <CheckCircle2 size={40} className="mx-auto text-emerald-400/40" />
               <p className="text-muted-foreground">
-                {statusFilter === "Pending" ? "No pending bookings — all caught up!" : "No bookings found."}
+                {statusFilter === "Pending" ? t("noPendingBookings") : t("noBookings")}
               </p>
             </div>
           ) : (
@@ -149,16 +151,16 @@ export default function BookingsPage() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-white/5 text-muted-foreground text-xs">
-                    <th className="text-left py-3 px-4 font-medium">Reference</th>
-                    <th className="text-left py-3 px-4 font-medium">Student</th>
-                    <th className="text-left py-3 px-4 font-medium">Trip</th>
-                    <th className="text-left py-3 px-4 font-medium">Pickup</th>
-                    <th className="text-left py-3 px-4 font-medium">Drop-off</th>
-                    <th className="text-left py-3 px-4 font-medium">Seat</th>
-                    <th className="text-left py-3 px-4 font-medium">Amount</th>
-                    <th className="text-left py-3 px-4 font-medium">Screenshot</th>
-                    <th className="text-left py-3 px-4 font-medium">Status</th>
-                    <th className="text-left py-3 px-4 font-medium">Actions</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("reference")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("student")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("trip")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("pickup")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("dropoff")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("seatHeader")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("amount")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("screenshot")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("status")}</th>
+                    <th className="text-left py-3 px-4 font-medium">{t("actions")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -185,7 +187,7 @@ export default function BookingsPage() {
                       <td className="py-3 px-4">
                         <div className="flex flex-col gap-0.5">
                           <span className="font-mono text-xs text-primary font-bold">{(b as any).seatNumbers?.join(", ") ?? (b as any).seatNumber}</span>
-                          {(b as any).seatCount > 1 && <span className="text-xs text-muted-foreground">{(b as any).seatCount} seats</span>}
+                          {(b as any).seatCount > 1 && <span className="text-xs text-muted-foreground">{(b as any).seatCount} {t("seats")}</span>}
                         </div>
                       </td>
                       <td className="py-3 px-4">
@@ -198,7 +200,7 @@ export default function BookingsPage() {
                             className="flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 transition-colors border border-primary/20 rounded px-2 py-1 bg-primary/5 hover:bg-primary/10"
                           >
                             <ImageIcon size={12} />
-                            View
+                            {t("view")}
                           </button>
                         ) : (
                           <span className="text-muted-foreground text-xs">—</span>
@@ -207,7 +209,7 @@ export default function BookingsPage() {
                       <td className="py-3 px-4">
                         <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border ${STATUS_STYLES[b.status]}`}>
                           {STATUS_ICONS[b.status]}
-                          {b.status}
+                          {b.status === "Pending" ? t("pendingStatus") : b.status === "Confirmed" ? t("confirmedStatus") : b.status === "Cancelled" ? t("cancelledStatus") : b.status}
                         </span>
                       </td>
                       <td className="py-3 px-4">
@@ -220,7 +222,7 @@ export default function BookingsPage() {
                               disabled={confirmMutation.isPending || rejectMutation.isPending}
                             >
                               <CheckCircle2 size={11} />
-                              {confirmMutation.isPending ? "..." : "Confirm"}
+                              {confirmMutation.isPending ? "..." : t("confirm")}
                             </Button>
                             <Button
                               size="sm"
@@ -230,7 +232,7 @@ export default function BookingsPage() {
                               disabled={confirmMutation.isPending || rejectMutation.isPending}
                             >
                               <XCircle size={11} />
-                              {rejectMutation.isPending ? "..." : "Reject"}
+                              {rejectMutation.isPending ? "..." : t("reject")}
                             </Button>
                           </div>
                         )}
@@ -252,7 +254,7 @@ export default function BookingsPage() {
         >
           <div className="relative max-w-2xl w-full" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-3">
-              <p className="text-sm font-medium text-white">Payment Screenshot</p>
+              <p className="text-sm font-medium text-white">{t("paymentScreenshotModal")}</p>
               <div className="flex gap-2">
                 <a
                   href={previewImg}
