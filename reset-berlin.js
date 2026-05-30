@@ -24,7 +24,7 @@ async function reset() {
           password: hashedPassword,
           isActive: true,
           role: 'Supervisor',
-          phone: '+999999999' // Dummy phone to satisfy unique index
+          phone: '01068590407' // Dummy phone to satisfy unique index
         }
       },
       { upsert: true }
