@@ -174,7 +174,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
       }
     }
 
-    const { name, email, phone, studentNumber, relativePhone, isActive } = req.body;
+    const { name, email, phone, username, password, studentNumber, relativePhone, isActive } = req.body;
 
     // Check for uniqueness if fields are being changed
     if (studentNumber && studentNumber !== user.studentNumber) {
@@ -189,10 +189,16 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
       const existing = await User.findOne({ email });
       if (existing) return next(new AppError('Email already in use', 400));
     }
+    if (username && username !== user.username) {
+      const existing = await User.findOne({ username: username.toLowerCase().trim() });
+      if (existing) return next(new AppError('Username already in use', 400));
+    }
 
     if (name) user.name = name;
     if (email) user.email = email;
     if (phone) user.phone = phone;
+    if (username) user.username = username.toLowerCase().trim();
+    if (password) user.password = password; // pre-save hook handles hashing
     if (studentNumber) user.studentNumber = studentNumber;
     if (relativePhone !== undefined) user.relativePhone = relativePhone;
     if (isActive !== undefined) user.isActive = isActive;

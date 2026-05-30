@@ -43,20 +43,25 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 };
 
 export const login = async (req: Request, res: Response, next: NextFunction) => {
-  // Support login via username only for Admins/Supervisors
+  // Support login via username or phone for Admins/Supervisors
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return next(new AppError('Please provide a username and password', 400));
+    return next(new AppError('Please provide a username/phone and password', 400));
   }
 
   // Explicitly select password since it is hidden by default in schema
-  const user = await User.findOne({ username: username.toLowerCase().trim() }).select('+password');
+  const user = await User.findOne({
+    $or: [
+      { username: username.toLowerCase().trim() },
+      { phone: username.trim() }
+    ]
+  }).select('+password');
 
-  logger.debug(`Login attempt for username: "${username}"`);
+  logger.debug(`Login attempt for identifier: "${username}"`);
   
   if (!user || !user.password || !(await user.comparePassword(password))) {
-    logger.debug(`Login failed for username: "${username}"`);
+    logger.debug(`Login failed for identifier: "${username}"`);
     return next(new AppError('Incorrect credentials', 401));
   }
 
