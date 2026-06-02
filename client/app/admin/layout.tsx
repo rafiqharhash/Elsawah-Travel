@@ -12,7 +12,7 @@ import { Footer } from "@/components/ui/footer";
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const { t } = useLang();
+  const { t, isRTL } = useLang();
   const [user, setUser] = useState<any>(null);
   const [checking, setChecking] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -74,7 +74,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-64 border-r border-white/10 bg-card/95 md:bg-card/30 backdrop-blur-xl flex flex-col transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <aside className={`fixed inset-y-0 ${isRTL ? "right-0 border-l" : "left-0 border-r"} z-50 w-64 border-white/10 bg-card/95 md:bg-card/30 backdrop-blur-xl flex flex-col transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${isMobileMenuOpen ? "translate-x-0" : (isRTL ? "translate-x-full" : "-translate-x-full")}`}>
         <div className="p-6 border-b border-white/10 flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
@@ -124,7 +124,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           <div className="flex items-center gap-3 md:hidden">
             <button 
               onClick={() => setIsMobileMenuOpen(true)}
-              className="p-2 -ml-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-white/5 transition-colors"
+              className={`p-2 ${isRTL ? "-mr-2" : "-ml-2"} text-muted-foreground hover:text-foreground rounded-lg hover:bg-white/5 transition-colors`}
             >
               <Menu size={20} />
             </button>

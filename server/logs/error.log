@@ -76,3 +76,7 @@
 2026-05-30 19:34:06:346 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m
 2026-05-30 19:34:11:3411 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m
 2026-05-30 19:34:19:3419 [31merror[39m: [31mPOST /api/v1/auth/student/login - Invalid phone number or password[39m
+2026-06-02 17:16:54:1654 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
+2026-06-02 17:16:56:1656 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
+2026-06-02 17:17:51:1751 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
+2026-06-02 17:17:52:1752 [31merror[39m: [31mGET /api/v1/stats/dashboard - Not authorized to access this route[39m
