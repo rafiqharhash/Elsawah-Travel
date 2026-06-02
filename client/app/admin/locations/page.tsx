@@ -263,7 +263,7 @@ export default function LocationsPage() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full text-sm whitespace-nowrap">
                 <thead>
                   <tr className="border-b border-white/5 text-muted-foreground">
                     <th className="text-left py-3 px-5 font-medium">{t("locationName")}</th>

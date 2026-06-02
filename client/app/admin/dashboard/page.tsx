@@ -162,7 +162,7 @@ export default function DashboardOverview() {
           transition={{ duration: 0.4, delay: 0.3 }}
         >
           <h3 className="text-lg font-semibold mb-4">{t("quickActions")}</h3>
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             {[
               { label: t("manageAdmins"), desc: t("manageAdminsDesc"), href: "/admin/admins", color: "from-purple-500/10 to-transparent border-purple-500/20" },
               { label: t("manualBooking"), desc: t("manualBookingDesc"), href: "/admin/students", color: "from-primary/10 to-transparent border-primary/20" },

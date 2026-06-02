@@ -354,11 +354,11 @@ export default function StudentPortal() {
                       <div className="space-y-2">
                         <label className="text-xs font-medium text-muted-foreground block">{t("pickupLocation")}</label>
                         {locationsLoading ? (
-                          <div className="grid grid-cols-2 gap-2">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {[1,2,3,4].map(i => <div key={i} className="h-12 rounded-lg bg-white/5 border border-white/10 animate-pulse" />)}
                           </div>
                         ) : (
-                          <div className="grid grid-cols-2 gap-2">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {pickupLocations.map((loc) => (
                               <button
                                 key={loc._id} type="button"
@@ -593,10 +593,10 @@ export default function StudentPortal() {
                           )}
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-2 bg-white/5 rounded-lg p-3 border border-white/5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-white/5 rounded-lg p-3 border border-white/5">
                         <div><p className="text-xs text-muted-foreground">{t("reference")}</p><p className="font-mono text-primary font-bold">{b.referenceId}</p></div>
-                        <div className="col-span-2"><p className="text-xs text-muted-foreground">{t("total")}</p><p className="font-semibold">{b.amount} EGP</p></div>
-                        <div className="col-span-2"><p className="text-xs text-muted-foreground">{t("pickupLocation")}</p><p>{b.pickupLocation} - {b.pickupAddress}</p></div>
+                        <div className="sm:col-span-2"><p className="text-xs text-muted-foreground">{t("total")}</p><p className="font-semibold">{b.amount} EGP</p></div>
+                        <div className="sm:col-span-2"><p className="text-xs text-muted-foreground">{t("pickupLocation")}</p><p>{b.pickupLocation} - {b.pickupAddress}</p></div>
                         <div><p className="text-xs text-muted-foreground">{t("seats")} ({b.seatCount})</p><p className="font-mono">{b.seatNumbers?.join(", ") || b.seatNumber}</p></div>
                         <div><p className="text-xs text-muted-foreground">{t("vehicleAssignment")}</p><p>{b.vehicleId?.vehicleNumber || t("pendingApproval")}</p></div>
                       </div>
@@ -626,7 +626,7 @@ export default function StudentPortal() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 60, scale: 0.96 }}
               transition={{ type: "spring", stiffness: 300, damping: 28 }}
-              className="w-full max-w-sm bg-card border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+              className="w-full max-w-sm bg-card border border-white/10 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
               onClick={e => e.stopPropagation()}
             >
               {/* Modal header */}
@@ -648,7 +648,7 @@ export default function StudentPortal() {
                 </button>
               </div>
 
-              <div className="p-5 space-y-4">
+              <div className="p-5 space-y-4 overflow-y-auto">
                 {/* Seat assignment highlight */}
                 <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 text-center">
                   <p className="text-xs text-muted-foreground mb-1">{(sheetBooking.seatNumbers?.length || 0) > 1 ? t("yourAssignedSeats") : t("yourAssignedSeat")}</p>

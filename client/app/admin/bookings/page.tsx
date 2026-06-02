@@ -107,13 +107,13 @@ export default function BookingsPage() {
 
       {/* Filters */}
       <div className="flex gap-3 flex-wrap">
-        <div className="relative">
+        <div className="relative w-full sm:w-auto">
           <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <Input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={`${t("search")}...`}
-            className="pl-9 bg-white/5 border-white/10 w-60"
+            className="pl-9 bg-white/5 border-white/10 w-full sm:w-60"
           />
         </div>
         <div className="flex rounded-lg overflow-hidden border border-white/10">
@@ -148,7 +148,7 @@ export default function BookingsPage() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full text-sm whitespace-nowrap">
                 <thead>
                   <tr className="border-b border-white/5 text-muted-foreground text-xs">
                     <th className="text-left py-3 px-4 font-medium">{t("reference")}</th>

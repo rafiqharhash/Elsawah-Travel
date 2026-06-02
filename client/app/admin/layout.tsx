@@ -3,7 +3,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, Bus, Route, Users, BarChart3, LogOut, ShieldCheck, BookOpen, MapPin } from "lucide-react";
+import { Home, Bus, Route, Users, BarChart3, LogOut, ShieldCheck, BookOpen, MapPin, Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LanguageToggle } from "@/components/ui/language-toggle";
 import { useLang } from "@/app/providers";
@@ -15,6 +15,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const { t } = useLang();
   const [user, setUser] = useState<any>(null);
   const [checking, setChecking] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Skip auth check on the login page itself
@@ -63,33 +64,49 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-background flex overflow-hidden">
+      {/* Mobile Backdrop */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden transition-opacity"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 border-r border-white/10 bg-card/30 backdrop-blur-xl hidden md:flex flex-col">
-        <div className="p-6 border-b border-white/10">
-          <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-black text-sm">E</div>
-            {t('appName')}
-          </h1>
-          {user && (
-            <p className="text-xs text-muted-foreground mt-2 truncate">{user.name} · <span className="text-primary">{user.role}</span></p>
-          )}
+      <aside className={`fixed inset-y-0 left-0 z-50 w-64 border-r border-white/10 bg-card/95 md:bg-card/30 backdrop-blur-xl flex flex-col transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className="p-6 border-b border-white/10 flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-black text-sm">E</div>
+              {t('appName')}
+            </h1>
+            {user && (
+              <p className="text-xs text-muted-foreground mt-2 truncate">{user.name} · <span className="text-primary">{user.role}</span></p>
+            )}
+          </div>
+          <button 
+            className="md:hidden text-muted-foreground hover:text-foreground p-1"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <X size={20} />
+          </button>
         </div>
 
-        <nav className="flex-1 p-4 space-y-1">
-          <NavItem href="/admin/dashboard" icon={<Home size={18} />} label={t('overview')} active={pathname === "/admin/dashboard"} />
-          <NavItem href="/admin/trips" icon={<Route size={18} />} label={t('trips')} active={pathname.startsWith("/admin/trips")} />
-          <NavItem href="/admin/locations" icon={<MapPin size={18} />} label={t('locationsFares')} active={pathname.startsWith("/admin/locations")} />
-          <NavItem href="/admin/vehicles" icon={<Bus size={18} />} label={t('vehicles')} active={pathname.startsWith("/admin/vehicles")} />
-          <NavItem href="/admin/students" icon={<Users size={18} />} label={t('students')} active={pathname.startsWith("/admin/students")} />
-          <NavItem href="/admin/bookings" icon={<BookOpen size={18} />} label={t('bookings')} active={pathname.startsWith("/admin/bookings")} />
-          <NavItem href="/admin/reports" icon={<BarChart3 size={18} />} label={t('reportsExport')} active={pathname.startsWith("/admin/reports")} />
+        <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+          <NavItem href="/admin/dashboard" icon={<Home size={18} />} label={t('overview')} active={pathname === "/admin/dashboard"} onClick={() => setIsMobileMenuOpen(false)} />
+          <NavItem href="/admin/trips" icon={<Route size={18} />} label={t('trips')} active={pathname.startsWith("/admin/trips")} onClick={() => setIsMobileMenuOpen(false)} />
+          <NavItem href="/admin/locations" icon={<MapPin size={18} />} label={t('locationsFares')} active={pathname.startsWith("/admin/locations")} onClick={() => setIsMobileMenuOpen(false)} />
+          <NavItem href="/admin/vehicles" icon={<Bus size={18} />} label={t('vehicles')} active={pathname.startsWith("/admin/vehicles")} onClick={() => setIsMobileMenuOpen(false)} />
+          <NavItem href="/admin/students" icon={<Users size={18} />} label={t('students')} active={pathname.startsWith("/admin/students")} onClick={() => setIsMobileMenuOpen(false)} />
+          <NavItem href="/admin/bookings" icon={<BookOpen size={18} />} label={t('bookings')} active={pathname.startsWith("/admin/bookings")} onClick={() => setIsMobileMenuOpen(false)} />
+          <NavItem href="/admin/reports" icon={<BarChart3 size={18} />} label={t('reportsExport')} active={pathname.startsWith("/admin/reports")} onClick={() => setIsMobileMenuOpen(false)} />
           {user?.role === "Supervisor" && (
-            <NavItem href="/admin/admins" icon={<ShieldCheck size={18} />} label={t('manageAdmins')} active={pathname.startsWith("/admin/admins")} supervisor />
+            <NavItem href="/admin/admins" icon={<ShieldCheck size={18} />} label={t('manageAdmins')} active={pathname.startsWith("/admin/admins")} supervisor onClick={() => setIsMobileMenuOpen(false)} />
           )}
         </nav>
 
-        <div className="p-4 border-t border-white/10">
+        <div className="p-4 border-t border-white/10 shrink-0">
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md text-destructive hover:bg-destructive/10 transition-colors"
@@ -103,9 +120,17 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-h-screen overflow-hidden">
         {/* Top Header */}
-        <header className="h-16 border-b border-white/10 bg-card/30 backdrop-blur-xl flex items-center justify-between px-6 shrink-0">
-          <div className="md:hidden font-bold">{t('appName')}</div>
-          <div className="flex-1" />
+        <header className="h-16 border-b border-white/10 bg-card/30 backdrop-blur-xl flex items-center justify-between px-4 sm:px-6 shrink-0">
+          <div className="flex items-center gap-3 md:hidden">
+            <button 
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="p-2 -ml-2 text-muted-foreground hover:text-foreground rounded-lg hover:bg-white/5 transition-colors"
+            >
+              <Menu size={20} />
+            </button>
+            <div className="font-bold text-lg">{t('appName')}</div>
+          </div>
+          <div className="hidden md:block flex-1" />
           <div className="flex items-center gap-3">
             <LanguageToggle />
             <ThemeToggle />
@@ -129,10 +154,11 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   );
 }
 
-function NavItem({ href, icon, label, active, supervisor }: { href: string; icon: ReactNode; label: string; active?: boolean; supervisor?: boolean }) {
+function NavItem({ href, icon, label, active, supervisor, onClick }: { href: string; icon: ReactNode; label: string; active?: boolean; supervisor?: boolean; onClick?: () => void }) {
   return (
     <Link
       href={href}
+      onClick={onClick}
       className={`flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
         active
           ? supervisor
@@ -144,7 +170,7 @@ function NavItem({ href, icon, label, active, supervisor }: { href: string; icon
       }`}
     >
       {icon}
-      {label}
+      <span className="truncate">{label}</span>
     </Link>
   );
 }

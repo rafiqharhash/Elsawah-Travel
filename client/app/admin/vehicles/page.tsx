@@ -111,7 +111,7 @@ export default function VehiclesPage() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full text-sm whitespace-nowrap">
                 <thead>
                   <tr className="border-b border-white/5 text-muted-foreground">
                     <th className="text-left py-3 px-4 font-medium">{t("plate")}</th>
