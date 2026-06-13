@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 
 // Replace with your MongoDB connection string if different
 // or ensure this connects to your replica set
-const uri = "mongodb://rafiqharhash_db_user:iambatman@ac-hq6lrxe-shard-00-00.ycvmc5a.mongodb.net:27017,ac-hq6lrxe-shard-00-01.ycvmc5a.mongodb.net:27017,ac-hq6lrxe-shard-00-02.ycvmc5a.mongodb.net:27017/?ssl=true&replicaSet=atlas-6epgvu-shard-0&authSource=admin&appName=Cluster0";
+const uri = process.env.MONGO_URI;
 
 async function seed() {
   try {
