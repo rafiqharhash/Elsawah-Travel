@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { processBookingTransaction } from '../services/bookingService';
 import { sendResponse } from '../utils/responseFormatter';
 import { AppError } from '../middleware/errorHandler';
-import { getIO } from '../socket';
+import { getPusher } from '../pusher';
 import { Booking } from '../models/Booking';
 import { Vehicle } from '../models/Vehicle';
 import { Trip } from '../models/Trip';
@@ -33,8 +33,8 @@ export const createBooking = async (req: Request, res: Response, next: NextFunct
   });
 
   // Notify trip room subscribers
-  const io = getIO();
-  io.to(`trip_${tripId}`).emit('seat_booked', {
+  const pusher = getPusher();
+  pusher.trigger(`trip_${tripId}`, 'seat_booked', {
     tripId: result.trip._id,
     vehicleId: result.vehicle._id,
     seatNumbers: result.booking.seatNumbers,
@@ -92,8 +92,8 @@ export const confirmBooking = async (req: Request, res: Response, next: NextFunc
   await booking.save();
 
   try {
-    const io = getIO();
-    io.to(`booking_${booking._id}`).emit('booking_status_updated', {
+    const pusher = getPusher();
+    pusher.trigger(`booking_${booking._id}`, 'booking_status_updated', {
       bookingId: booking._id,
       status: 'Confirmed',
       referenceId: booking.referenceId,
@@ -131,8 +131,8 @@ export const rejectBooking = async (req: Request, res: Response, next: NextFunct
     session.endSession();
 
     try {
-      const io = getIO();
-      io.to(`booking_${booking._id}`).emit('booking_status_updated', {
+      const pusher = getPusher();
+      pusher.trigger(`booking_${booking._id}`, 'booking_status_updated', {
         bookingId: booking._id,
         status: 'Cancelled',
         referenceId: booking.referenceId,

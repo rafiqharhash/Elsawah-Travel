@@ -114,7 +114,7 @@ export const removeAdmin = async (req: Request, res: Response, next: NextFunctio
 export const manualBooking = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { processBookingTransaction } = await import('../services/bookingService');
-    const { getIO } = await import('../socket');
+    const { getPusher } = await import('../pusher');
     const { Booking } = await import('../models/Booking');
 
     const { studentName, studentPhone, tripId, pickupLocation, dropoffLocation } = req.body;
@@ -141,8 +141,8 @@ export const manualBooking = async (req: Request, res: Response, next: NextFunct
 
     // Emit real-time update
     try {
-      const io = getIO();
-      io.to(`trip_${tripId}`).emit('seat_booked', {
+      const pusher = getPusher();
+      pusher.trigger(`trip_${tripId}`, 'seat_booked', {
         tripId,
         totalBooked: result.trip.totalBooked,
         occupancyPercentage: result.trip.occupancyPercentage,

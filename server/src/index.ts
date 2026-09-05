@@ -6,7 +6,6 @@ import { buildApp } from './app';
 import { connectDB } from './config/db';
 import { env } from './config/env';
 import { logger } from './utils/logger';
-import { initSocket } from './socket';
 import { startTripScheduler } from './jobs/tripScheduler';
 
 const startServer = async () => {
@@ -14,9 +13,6 @@ const startServer = async () => {
 
   const app = buildApp();
   const httpServer = createServer(app);
-
-  // Initialize Socket.io
-  initSocket(httpServer);
 
   // Start Background Jobs
   startTripScheduler();
