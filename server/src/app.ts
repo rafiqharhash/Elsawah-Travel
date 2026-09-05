@@ -29,7 +29,8 @@ export const buildApp = (): Express => {
   app.use(morgan('dev'));
 
   // Serve uploaded payment screenshots statically
-  app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+  const uploadDir = process.env.NODE_ENV === 'production' ? '/tmp/uploads' : path.join(process.cwd(), 'uploads');
+  app.use('/uploads', express.static(uploadDir));
 
   // Rate Limiting
   const limiter = rateLimit({

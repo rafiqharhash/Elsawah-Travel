@@ -3,7 +3,10 @@ import path from 'path';
 import fs from 'fs';
 
 // Ensure the uploads directory exists
-const UPLOAD_DIR = path.join(process.cwd(), 'uploads', 'payments');
+// Use /tmp for Vercel serverless environment (read-only filesystem)
+const UPLOAD_DIR = process.env.NODE_ENV === 'production' 
+  ? path.join('/tmp', 'uploads', 'payments')
+  : path.join(process.cwd(), 'uploads', 'payments');
 if (!fs.existsSync(UPLOAD_DIR)) {
   fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 }
