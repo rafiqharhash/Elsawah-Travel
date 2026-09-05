@@ -9,6 +9,14 @@ import 'express-async-errors'; // Handles async errors without try/catch everywh
 import { errorHandler } from './middleware/errorHandler';
 import authRoutes from './routes/authRoutes';
 import bookingRoutes from './routes/bookingRoutes';
+import exportRoutes from './routes/exportRoutes';
+import vehicleRoutes from './routes/vehicleRoutes';
+import tripRoutes from './routes/tripRoutes';
+import userRoutes from './routes/userRoutes';
+import studentRoutes from './routes/studentRoutes';
+import statsRoutes from './routes/statsRoutes';
+import locationRoutes from './routes/locationRoutes';
+import { setupSwagger } from './config/swagger';
 
 export const buildApp = (): Express => {
   const app = express();
@@ -34,16 +42,16 @@ export const buildApp = (): Express => {
   // API Routes (v1)
   app.use('/api/v1/auth', authRoutes);
   app.use('/api/v1/bookings', bookingRoutes);
-  app.use('/api/v1/export', require('./routes/exportRoutes').default);
-  app.use('/api/v1/vehicles', require('./routes/vehicleRoutes').default);
-  app.use('/api/v1/trips', require('./routes/tripRoutes').default);
-  app.use('/api/v1/users', require('./routes/userRoutes').default);
-  app.use('/api/v1/students', require('./routes/studentRoutes').default);
-  app.use('/api/v1/stats', require('./routes/statsRoutes').default);
-  app.use('/api/v1/locations', require('./routes/locationRoutes').default);
+  app.use('/api/v1/export', exportRoutes);
+  app.use('/api/v1/vehicles', vehicleRoutes);
+  app.use('/api/v1/trips', tripRoutes);
+  app.use('/api/v1/users', userRoutes);
+  app.use('/api/v1/students', studentRoutes);
+  app.use('/api/v1/stats', statsRoutes);
+  app.use('/api/v1/locations', locationRoutes);
   
   // Swagger Documentation
-  require('./config/swagger').setupSwagger(app);
+  setupSwagger(app);
 
   // Welcome / API Info
   app.get('/', (req, res) => {
