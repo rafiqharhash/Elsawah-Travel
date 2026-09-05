@@ -1,44 +1,41 @@
-import { io, Socket } from 'socket.io-client';
+import Pusher from 'pusher-js';
 
-const SOCKET_URL = process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '') || 'http://localhost:5000';
-
-let socket: Socket;
+let pusher: Pusher | null = null;
 
 export const initiateSocketConnection = () => {
-  socket = io(SOCKET_URL);
+  if (pusher) return;
+  
+  // Connect to Pusher using the environment variables
+  pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY || '', {
+    cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER || '',
+  });
 };
 
 export const disconnectSocket = () => {
-  if (socket) socket.disconnect();
+  if (pusher) {
+    pusher.disconnect();
+    pusher = null;
+  }
 };
 
-// ── Trip occupancy updates ────────────────────────────────────────────────────
 export const subscribeToTrip = (tripId: string, cb: (data: any) => void) => {
-  if (!socket) return;
-  socket.emit('join_trip_room', tripId);
-  socket.on('seat_booked', cb);
+  if (!pusher) return;
+  const channel = pusher.subscribe(`trip_${tripId}`);
+  channel.bind('seat_booked', cb);
 };
 
 export const unsubscribeFromTrip = (tripId: string) => {
-  if (!socket) return;
-  socket.emit('leave_trip_room', tripId);
-  socket.off('seat_booked');
+  if (!pusher) return;
+  pusher.unsubscribe(`trip_${tripId}`);
 };
 
-// ── Booking status updates ────────────────────────────────────────────────────
-// Called after a student submits a booking and is waiting on admin approval.
-// Fires when admin confirms or rejects, so the student page updates instantly.
-export const subscribeToBooking = (
-  bookingId: string,
-  cb: (data: { bookingId: string; status: 'Confirmed' | 'Cancelled'; referenceId: string }) => void
-) => {
-  if (!socket) return;
-  socket.emit('join_booking_room', bookingId);
-  socket.on('booking_status_updated', cb);
+export const subscribeToBooking = (bookingId: string, cb: (data: any) => void) => {
+  if (!pusher) return;
+  const channel = pusher.subscribe(`booking_${bookingId}`);
+  channel.bind('booking_status_updated', cb);
 };
 
 export const unsubscribeFromBooking = (bookingId: string) => {
-  if (!socket) return;
-  socket.emit('leave_booking_room', bookingId);
-  socket.off('booking_status_updated');
+  if (!pusher) return;
+  pusher.unsubscribe(`booking_${bookingId}`);
 };
