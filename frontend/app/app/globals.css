@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+:root {
+  /* Modern SaaS Light Theme - Crisp White & Slate */
+  --background: 210 40% 98%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  
+  /* Premium Travel Azure / Indigo Accent */
+  --primary: 230 85% 55%;
+  --primary-foreground: 210 40% 98%;
+  
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 230 85% 55%;
+  --radius: 0.75rem;
+}
+
+.dark {
+  /* Elegant Dark Mode - Midnight Navy / Deep Black */
+  --background: 222 47% 4%;
+  --foreground: 210 40% 98%;
+  
+  /* Deep glass cards */
+  --card: 222 47% 6%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 47% 6%;
+  --popover-foreground: 210 40% 98%;
+  
+  /* Vibrant Blue/Indigo Accent for dark mode */
+  --primary: 230 90% 65%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 230 90% 65%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground selection:bg-primary/30 antialiased;
+  }
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  @apply bg-background/60 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
+}
+
+.glass-card {
+  @apply bg-card/50 backdrop-blur-md border border-white/5 shadow-lg rounded-xl transition-all duration-300;
+}
+.glass-card:hover {
+  @apply border-white/10 shadow-xl;
+}
+
+/* Arabic font when RTL direction is active */
+:root[dir="rtl"] body,
+:root[dir="rtl"] * {
+  font-family: var(--font-arabic), 'Noto Sans Arabic', system-ui, sans-serif;
+}
+
+/* RTL layout adjustments */
+:root[dir="rtl"] .glass-card,
+:root[dir="rtl"] .glass {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ── Custom Select Styling ────────────────────────────────────────────────
+   We do NOT use appearance:none globally — it breaks native option popup
+   rendering in most browsers (options become invisible).
+   Instead we style color/border/bg on the select element itself, and let
+   the browser handle the dropdown popup natively. We use the .sys-select
+   utility class for consistent, theme-aware styling across the app.
+   ─────────────────────────────────────────────────────────────────────── */
+
+/* Base select: just fix the color so it follows our CSS variables */
+select {
+  color-scheme: dark;
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--card) / 0.6);
+}
+
+/* Light mode overrides */
+:root:not(.dark) select {
+  color-scheme: light;
+}
+
+/* The .sys-select class is our full custom-styled select —
+   use it on every <select> element in the app */
+.sys-select {
+  display: block;
+  width: 100%;
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238899aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.6rem center;
+  background-size: 1rem;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.sys-select:hover {
+  border-color: hsl(var(--ring) / 0.5);
+}
+
+.sys-select:focus {
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+}
+
+/* Allow Tailwind width utilities to override sys-select default width */
+.sys-select.w-auto { width: auto; }

@@ -4,18 +4,18 @@
   "description": "Professional Transportation Services",
   "private": true,
   "workspaces": [
-    "client",
-    "server"
+    "frontend",
+    "backend"
   ],
   "scripts": {
-    "dev:client": "npm run dev --workspace=client",
-    "dev:server": "npm run dev --workspace=server",
-    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
-    "build:client": "npm run build --workspace=client",
-    "build:server": "npm run build --workspace=server",
-    "build": "npm run build:client && npm run build:server",
-    "start": "concurrently \"npm run start --workspace=client\" \"npm run start --workspace=server\"",
-    "install:all": "npm install"
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "build:frontend": "npm run build --workspace=frontend",
+    "build:backend": "npm run build --workspace=backend",
+    "build": "npm run build:frontend && npm run build:backend",
+    "start": "concurrently \"npm run start --workspace=frontend\" \"npm run start --workspace=backend\"",
+    "install:all": "npm install && npm install --workspace=frontend && npm install --workspace=backend"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
